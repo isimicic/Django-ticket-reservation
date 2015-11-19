@@ -11,10 +11,10 @@ cd ticketReservation/
 pip install -r requirements.txt
 ````
 
-###Create admin user
+###Create super user
 
 ````
-python manage.py syncdb
+python manage.py createsuperuser
 ````
 
 ###Run server

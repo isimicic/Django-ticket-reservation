@@ -8,7 +8,7 @@ cd ticketReservation/
 git clone https://isimicic@bitbucket.org/VsitePythonTeam/ticket-reservation.git
 
 cd ticketReservation/
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 ````
 
 ###Create super user

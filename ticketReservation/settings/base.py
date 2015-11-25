@@ -18,7 +18,9 @@ PROJECT_APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
 PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 AUTH_PROFILE_MODULE = 'account.UserProfile'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 

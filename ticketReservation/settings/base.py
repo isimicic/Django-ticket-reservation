@@ -12,12 +12,13 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import sys
 
+
+PROJECT_APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
+PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-PROJECT_ROOT = os.path.dirname(__file__)
-sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
+AUTH_PROFILE_MODULE = 'account.UserProfile'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -42,6 +43,7 @@ PREREQ_APPS = [
 ]
 
 PROJECT_APPS = [
+    'ticketReservation.apps.account'
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS

@@ -45,7 +45,8 @@ PREREQ_APPS = [
 ]
 
 PROJECT_APPS = [
-    'ticketReservation.apps.account'
+    'ticketReservation.apps.account',
+    'ticketReservation.apps.booking',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS

@@ -10,6 +10,10 @@ class UserProfile(models.Model):
         regex=r'^\+?1?\d{9,15}$',
         message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed")
     number = models.CharField(max_length=15, validators=[phone_regex])
-    adress = models.CharField(max_length=50)
+    address = models.CharField(max_length=50, default=None)
+
+    def __unicode__(self):
+        """Return nicely formatted address."""
+        return u'{0}'.format(self.address)
 
 User.profile = property(lambda u: UserProfile.objects.get_orcreate(user=u)[0])

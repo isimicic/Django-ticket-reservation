@@ -12,7 +12,7 @@ class Movie(models.Model):
     duration = models.IntegerField(choices=CHOICES)
 
     def __unicode__(self):
-        return "{0} {1} {2} {3} {4}".format(
+        return u"{0} {1} {2} {3} {4}".format(
             self.title, self.director, self.cast,
             self.description, self.duration)
 
@@ -20,8 +20,8 @@ class Movie(models.Model):
 class City(models.Model):
     name = models.CharField(max_length=255)
 
-    def __str__(self):
-        return "{0}".format(self.name)
+    def __unicode__(self):
+        return u"{0}".format(self.name)
 
 
 class Cinema(models.Model):
@@ -32,7 +32,7 @@ class Cinema(models.Model):
     city = models.ForeignKey(City)
 
     def __unicode__(self):
-        return "{0} {1} {2}".format(
+        return u"{0} {1} {2}".format(
             self.name, self.address, self.auditorium_number)
 
 
@@ -42,7 +42,7 @@ class Auditorium(models.Model):
     cinema = models.ForeignKey(Cinema)
 
     def __unicode__(self):
-        return "{0} {1}".format(self.name, self.seats_number)
+        return u"{0} {1}".format(self.name, self.seats_number)
 
 
 class Seat(models.Model):
@@ -52,14 +52,14 @@ class Seat(models.Model):
     auditorium = models.ForeignKey(Auditorium)
 
     def __unicode__(self):
-        return "{0} {1}".format(self.row, self.number)
+        return u"{0} {1}".format(self.row, self.number)
 
 
 class ReservationType(models.Model):
     type = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return "{0}".format(self.type)
+        return u"{0}".format(self.type)
 
 
 class Reservation(models.Model):
@@ -71,7 +71,7 @@ class Reservation(models.Model):
     user = models.ForeignKey(User)
 
     def __unicode__(self):
-        return "{0} {1} {2} {3}".format(
+        return u"{0} {1} {2} {3}".format(
             self.reservation_date, self.reserved, self.paid, self.active)
 
 
@@ -82,7 +82,7 @@ class Screening(models.Model):
     reserved_seats = models.ManyToManyField(Seat, through='SeatReserved')
 
     def __unicode__(self):
-        return "{0}".format(self.screening_start)
+        return u"{0}".format(self.screening_start)
 
 
 class SeatReserved(models.Model):

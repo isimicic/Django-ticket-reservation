@@ -6,10 +6,9 @@ from datetime import datetime
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     director = models.CharField(max_length=255)
-    cast = models.CharField(max_length=255)
+    cast = models.TextField()
     description = models.TextField()
-    CHOICES = [(i, i) for i in range(50, 150, 1)]
-    duration = models.IntegerField(choices=CHOICES)
+    duration = models.PositiveSmallIntegerField()
 
     def __unicode__(self):
         return u"{0} {1} {2} {3} {4}".format(
@@ -28,7 +27,7 @@ class Cinema(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     CHOICES = [(i, i) for i in range(1, 21, 1)]
-    auditorium_number = models.IntegerField(choices=CHOICES)
+    auditorium_number = models.PositiveSmallIntegerField(choices=CHOICES)
     city = models.ForeignKey(City)
 
     def __unicode__(self):
@@ -48,7 +47,7 @@ class Auditorium(models.Model):
 class Seat(models.Model):
     row = models.CharField(max_length=2)
     CHOICES = [(i, i + 1) for i in range(20)]
-    number = models.IntegerField(choices=CHOICES)
+    number = models.PositiveSmallIntegerField(choices=CHOICES)
     auditorium = models.ForeignKey(Auditorium)
 
     def __unicode__(self):

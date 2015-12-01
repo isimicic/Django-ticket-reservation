@@ -1,11 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserManager
 from django.core.validators import RegexValidator
 
 
-class UserProfile(models.Model):
+class UserProfile(User):
     """ User Profile Model """
-    user = models.OneToOneField(User, primary_key=True)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',
         message="Phone number must be entered in the format: '+999999999'.\
@@ -17,4 +16,4 @@ class UserProfile(models.Model):
         """Return nicely formatted address."""
         return u'{0} {1} {2}'.format(self, self.number, self.address)
 
-User.profile = property(lambda u: UserProfile.objects.get_orcreate(user=u)[0])
+    objects = UserManager

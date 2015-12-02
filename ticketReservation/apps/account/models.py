@@ -16,4 +16,4 @@ class UserProfile(User):
         """Return nicely formatted address."""
         return u'{0} {1} {2}'.format(self, self.number, self.address)
 
-    objects = UserManager
+    objects = UserManager()

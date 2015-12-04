@@ -107,6 +107,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "account/urls.py",
+			"settings":
+			{
+				"buffer_size": 491,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/account/login.html",
+			"settings":
+			{
+				"buffer_size": 873,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -170,14 +186,26 @@
 	"expanded_folders":
 	[
 		"/home/isimicic/ticketReservation/src",
-		"/home/isimicic/ticketReservation/src/ticketReservation"
+		"/home/isimicic/ticketReservation/src/ticketReservation",
+		"/home/isimicic/ticketReservation/src/ticketReservation/templates",
+		"/home/isimicic/ticketReservation/src/ticketReservation/templates/account"
 	],
 	"file_history":
 	[
-		"/home/isimicic/ticketReservation/src/ticketReservation/wsgi.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/templates/account/change-password.html",
+		"/home/isimicic/ticketReservation/src/ticketReservation/account/forms.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/templates/account/register.html",
+		"/home/isimicic/ticketReservation/src/ticketReservation/templates/account/login.html",
+		"/home/isimicic/ticketReservation/src/ticketReservation/account/models.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/account/views.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/templates/registration/password_change_form.html",
+		"/home/isimicic/ticketReservation/src/ticketReservation/settings/base.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/booking/urls.py",
 		"/home/isimicic/ticketReservation/src/ticketReservation/urls.py",
-		"/home/isimicic/ticketReservation/src/ticketReservation/booking/views.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/booking/models.py",
 		"/home/isimicic/ticketReservation/src/ticketReservation/views.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/wsgi.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/booking/views.py",
 		"/home/isimicic/Desktop/zad1.py",
 		"/home/isimicic/Desktop/zad1",
 		"/home/isimicic/ticketReservation/ticket-reservation/ticketReservation/apps/account/models.py",
@@ -291,17 +319,7 @@
 		"/home/isimicic/ticketReservation/ticketReservation/static/css/site.css",
 		"/home/isimicic/ticketReservation/ticketReservation/static/css/bootstrap-responsive.min.css",
 		"/home/isimicic/ticketReservation/ticketReservation/requirements.txt",
-		"/home/isimicic/ticketReservation/ticketReservation/settings/base.py",
-		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/my.cnf",
-		"/etc/mysql/my.cnf",
-		"/home/isimicic/hand-project/laravel-app/config/database.php",
-		"/home/isimicic/hand-project/laravel-app/config/app.php",
-		"/home/isimicic/hand-project/laravel-app/config/auth.php",
-		"/home/isimicic/hand-project/laravel-app/resources/views/welcome.blade.php",
-		"/home/isimicic/hand-project/laravel-app/config/mail.php",
-		"/home/isimicic/hand-project/laravel-app/config/filesystems.php",
-		"/home/isimicic/hand-project/laravel-app/config/compile.php",
-		"/home/isimicic/hand-project/laravel-app/config/cache.php"
+		"/home/isimicic/ticketReservation/ticketReservation/settings/base.py"
 	],
 	"find":
 	{
@@ -347,8 +365,66 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "account/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 491,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								188,
+								188
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "templates/account/login.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 873,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22,
+								22
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -358,7 +434,7 @@
 	},
 	"input":
 	{
-		"height": 33.0
+		"height": 41.0
 	},
 	"layout":
 	{
@@ -437,7 +513,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 213.0,
+	"side_bar_width": 288.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

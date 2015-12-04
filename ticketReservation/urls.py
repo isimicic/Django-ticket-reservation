@@ -19,6 +19,6 @@ from ticketReservation import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^city/', include('ticketReservation.apps.booking.urls')),
+    url(r'^city/', include('ticketReservation.booking.urls')),
     url(r'^$', views.index, name='index'),
 ]

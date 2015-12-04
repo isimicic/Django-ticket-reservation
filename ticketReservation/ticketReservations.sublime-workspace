@@ -1,0 +1,445 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"User",
+				"UserProfile"
+			],
+			[
+				"re",
+				"reserved	statement"
+			],
+			[
+				"res",
+				"reservation_date	statement"
+			],
+			[
+				"Se",
+				"SeatReserved	(class)"
+			],
+			[
+				"Res",
+				"ReservationType	(class)"
+			],
+			[
+				"Ci",
+				"City	(class)"
+			],
+			[
+				"reservatio",
+				"ReservationType	class"
+			],
+			[
+				"use",
+				"UserProfile	class"
+			],
+			[
+				"AUTH",
+				"AUTH_PROFILE_MODULE"
+			],
+			[
+				"mul",
+				"MULTILINE	statement"
+			],
+			[
+				"requ",
+				"RequestContext"
+			],
+			[
+				"Cho",
+				"ChoiceInline	class"
+			],
+			[
+				"Ques",
+				"QuestionAdmin	class"
+			],
+			[
+				"pu",
+				"pub_date	statement"
+			],
+			[
+				"cho",
+				"Choice"
+			],
+			[
+				"questio",
+				"question_text	statement"
+			],
+			[
+				"article",
+				"article_id"
+			],
+			[
+				"__",
+				"__unicode__"
+			],
+			[
+				"ques",
+				"question"
+			],
+			[
+				"qu",
+				"Question	class"
+			],
+			[
+				"que",
+				"question_id	param"
+			],
+			[
+				"Que",
+				"QuestionAdmin	class"
+			],
+			[
+				"date",
+				"datetime	module"
+			],
+			[
+				"pub",
+				"pub_date"
+			],
+			[
+				"read",
+				"readlines	function"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 390.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: 	",
+				"Package Control: Install Package"
+			],
+			[
+				"install pac	",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 367.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib2,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/isimicic/ticketReservation/src",
+		"/home/isimicic/ticketReservation/src/ticketReservation"
+	],
+	"file_history":
+	[
+		"/home/isimicic/ticketReservation/src/ticketReservation/wsgi.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/urls.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/booking/views.py",
+		"/home/isimicic/ticketReservation/src/ticketReservation/views.py",
+		"/home/isimicic/Desktop/zad1.py",
+		"/home/isimicic/Desktop/zad1",
+		"/home/isimicic/ticketReservation/ticket-reservation/ticketReservation/apps/account/models.py",
+		"/home/isimicic/hand-project/public/robots.txt",
+		"/home/isimicic/hand-project/public/index.php",
+		"/home/isimicic/Desktop/gitBranch",
+		"/home/isimicic/Desktop/GRAF/Untitled Document",
+		"/home/isimicic/Desktop/zaprojekt",
+		"/home/isimicic/ticketReservation/ticket-reservation/ticketReservation/urls.py",
+		"/home/isimicic/ticketReservation/ticket-reservation/ticketReservation/apps/booking/urls.py",
+		"/home/isimicic/Desktop/test/siteTest/siteTest/settings.py",
+		"/home/isimicic/Desktop/test/siteTest/siteTest/urls.py",
+		"/home/isimicic/ticketReservation/ticket-reservation/ticketReservation/views.py",
+		"/home/isimicic/Desktop/DjangoApp/mysite/polls/models.py",
+		"/home/isimicic/Desktop/DjangoApp/mysite/polls/views.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/page/views.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/article/views.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/article/models.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/apps/account/admin.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/settings/base.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/apps/account/models.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/apps/booking/models.py",
+		"/home/isimicic/Desktop/PYTHON/zadatak/zadatak/slike/admin.py",
+		"/home/isimicic/Desktop/PYTHON/zadatak/zadatak/zadatak/settings.py",
+		"/home/isimicic/Desktop/PYTHON/zadatak/zadatak/slike/models.py",
+		"/home/isimicic/Desktop/PYTHON/zadatak/zadatak/requirements.txt",
+		"/home/isimicic/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/isimicic/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/apps/booking/admin.py",
+		"/home/isimicic/.pip/pip.log",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/apps/booking/views.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/apps/booking/urls.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/article/admin.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/page/admin.py",
+		"/home/isimicic/Desktop/DjangoApp/mysite/polls/admin.py",
+		"/home/isimicic/ticketReservation/ticketReservation/apps/account/admin.py",
+		"/home/isimicic/ticketReservation/ticketReservation/apps/account/models.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/apps/__init__.py",
+		"/home/isimicic/Desktop/DjangoApp/mysite/mysite/settings.py",
+		"/home/isimicic/Desktop/DjangoApp/mysite/mysite/__init__.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/__init__.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/settings/__init__.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/settings/jenkins.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/settings/base.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/settings/prod.py",
+		"/home/isimicic/managing_contacts/managing_contacts/manage.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/wsgi.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/settings/dev.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/settings.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/templates/_account_bar.html",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/templates/site_base.html",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/templates/homepage.html",
+		"/home/isimicic/managing_contacts/managing_contacts/vCard/admin.py",
+		"/home/isimicic/managing_contacts/managing_contacts/vCard/models.py",
+		"/home/isimicic/managing_contacts/managing_contacts/fixtures/sites.json",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/templates/_styles.html",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/templates/_scripts.html",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/templates/_footer.html",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/apps.py",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/urls.py",
+		"/home/isimicic/managing_contacts/managing_contacts/CONTRIBUTING.md",
+		"/home/isimicic/managing_contacts/managing_contacts/managing_contacts/receivers.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/blog/urls.py",
+		"/home/isimicic/Desktop/mysite/mysite/urls.py",
+		"/home/isimicic/managing_contact/managing_contacts/managing_contacts/urls.py",
+		"/home/isimicic/Desktop/mysite/mysite/templates/site_base.html",
+		"/home/isimicic/Desktop/mysite/mysite/settings.py",
+		"/home/isimicic/Desktop/site_base_files/7987666",
+		"/home/isimicic/managing_contact/managing_contacts/managing_contacts/settings.py",
+		"/home/isimicic/managing_contact/managing_contacts/managing_contacts/templates/site_base.html",
+		"/home/isimicic/managing_contact/managing_contacts/requirements.txt",
+		"/home/isimicic/managing-cotacts/mysite/static/src/less/custom.less",
+		"/home/isimicic/managing-cotacts/mysite/static/src/less/account.less",
+		"/home/isimicic/managing-cotacts/mysite/static/src/less/site.less",
+		"/home/isimicic/managing-cotacts/mysite/mysite/templates/site_base.html",
+		"/home/isimicic/managing-cotacts/mysite/mysite/templates/_scripts.html",
+		"/home/isimicic/managing-cotacts/mysite/mysite/templates/homepage.html",
+		"/home/isimicic/managing-cotacts/mysite/mysite/templates/_footer.html",
+		"/home/isimicic/managing-cotacts/mysite/mysite/templates/_account_bar.html",
+		"/home/isimicic/managing-cotacts/mysite/mysite/templates/_styles.html",
+		"/home/isimicic/managing-cotacts/mysite/static/STATIC_README.md",
+		"/home/isimicic/managing-cotacts/mysite/package.json",
+		"/home/isimicic/managing-cotacts/mysite/requirements.txt",
+		"/home/isimicic/managing-cotacts/managing_contacts/managing_contacts/settings.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/README.txt",
+		"/home/isimicic/managing-cotacts/managing_contacts/README.md",
+		"/home/isimicic/ticketReservation/ticketReservation/README.md",
+		"/home/isimicic/managing-cotacts/managing_contacts/.gitignore",
+		"/home/isimicic/Desktop/Zad/zad2-Luka.py",
+		"/home/isimicic/Desktop/Zad/zad1-Luka.py",
+		"/home/isimicic/storing_contacts/managing_contacts/managing_contacts/settings.py",
+		"/home/isimicic/Desktop/Zad/zad1.py",
+		"/home/isimicic/Desktop/zad2-Luka.py",
+		"/home/isimicic/Desktop/zad1-Luka.py",
+		"/home/isimicic/Desktop/EUR.txt",
+		"/home/isimicic/Desktop/zad.py",
+		"/home/isimicic/storing_contacts/managing_contacts/.gitignore",
+		"/home/isimicic/storing_contacts/managing_contacts/manage.py",
+		"/home/isimicic/ticketReservation/ticketReservation/templates/base/base.html",
+		"/home/isimicic/Desktop/DjangoApp/mysite/polls/templates/polls/index.html",
+		"/home/isimicic/Desktop/DjangoApp/mysite/polls/urls.py",
+		"/home/isimicic/Desktop/DjangoApp/mysite/mysite/urls.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/urls.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/settings.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/page/models.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/requirements.txt",
+		"/home/isimicic/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/blog/settings.py",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/templates/test.html",
+		"/home/isimicic/Desktop/PYTHON/vjezba/vsite-python-blog/templates/base.html",
+		"/home/isimicic/ticketReservation/ticketReservation/static/css/site.css",
+		"/home/isimicic/ticketReservation/ticketReservation/static/css/bootstrap-responsive.min.css",
+		"/home/isimicic/ticketReservation/ticketReservation/requirements.txt",
+		"/home/isimicic/ticketReservation/ticketReservation/settings/base.py",
+		"/home/isimicic/ticketReservation/ticketReservation/ticketReservation/my.cnf",
+		"/etc/mysql/my.cnf",
+		"/home/isimicic/hand-project/laravel-app/config/database.php",
+		"/home/isimicic/hand-project/laravel-app/config/app.php",
+		"/home/isimicic/hand-project/laravel-app/config/auth.php",
+		"/home/isimicic/hand-project/laravel-app/resources/views/welcome.blade.php",
+		"/home/isimicic/hand-project/laravel-app/config/mail.php",
+		"/home/isimicic/hand-project/laravel-app/config/filesystems.php",
+		"/home/isimicic/hand-project/laravel-app/config/compile.php",
+		"/home/isimicic/hand-project/laravel-app/config/cache.php"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ruler",
+			"Auditorium",
+			"Auditorum",
+			"auditorum",
+			"BASE_DIR",
+			"PUBLIC_ROOT",
+			"PROJECT_APP_ROOT",
+			"settings",
+			"example.com",
+			"    #",
+			"#...\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.autopep8":
+	{
+		"height": 37.0
+	},
+	"output.exec":
+	{
+		"height": 139.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "ticketReservations.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 213.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

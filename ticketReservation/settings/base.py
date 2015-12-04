@@ -13,11 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-
-PROJECT_APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
-PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print BASE_DIR
 
 CUSTOM_USER_MODEL = 'account.UserProfile'
 
@@ -45,8 +42,8 @@ PREREQ_APPS = [
 ]
 
 PROJECT_APPS = [
-    'ticketReservation.apps.account',
-    'ticketReservation.apps.booking',
+    'ticketReservation.account',
+    'ticketReservation.booking',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
@@ -67,7 +64,7 @@ ROOT_URLCONF = 'ticketReservation.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

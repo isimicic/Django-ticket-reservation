@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+# Our views
+from .views import Index
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^city/', include('booking.urls')),
+    # url(r'^account/', include('account.urls')),
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^$', Index.as_view()),
 ]

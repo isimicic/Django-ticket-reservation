@@ -12,12 +12,10 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import sys
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MAIN_PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 
-PROJECT_ROOT = os.path.dirname(__file__)
-sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -42,6 +40,7 @@ PREREQ_APPS = [
 ]
 
 PROJECT_APPS = [
+    'booking',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
@@ -62,7 +61,7 @@ ROOT_URLCONF = 'ticketReservation.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(PROJECT_PATH, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,6 +88,9 @@ DATABASES = {
         'PASSWORD': 'django',
         'HOST': 'isimicic.com',
         'PORT': '',
+        'OPTIONS': {
+            "init_command": "SET storage_engine=INNODB",
+        },
     }
 }
 
@@ -98,7 +100,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Zagreb'
 
 USE_I18N = True
 
@@ -110,4 +112,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = os.path.join(PROJECT_PATH, 'static/')
+
+
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+# MAIL
+EMAIL_HOST = 'mail.isimicic.com'
+EMAIL_HOST_USER = 'django@isimicic.com'
+EMAIL_HOST_PASSWORD = 'tmgRVJ$}8)qS'
+DEFAULT_FROM_EMAIL = 'djnago@isimicic.com'
+SERVER_EMAIL = 'django@isimicic.com'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False

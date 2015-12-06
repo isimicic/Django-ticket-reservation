@@ -61,6 +61,15 @@ class ReservationType(models.Model):
         return u"{0}".format(self.type)
 
 
+class Screening(models.Model):
+    screening_start = models.DateTimeField()
+    movie = models.ForeignKey(Movie)
+    auditorium = models.ForeignKey(Auditorium)
+
+    def __unicode__(self):
+        return u"{0}".format(self.screening_start)
+
+
 class Reservation(models.Model):
     reservation_date = models.DateTimeField(default=datetime.now)
     reserved = models.BooleanField(default=True)
@@ -68,23 +77,9 @@ class Reservation(models.Model):
     active = models.BooleanField(default=True)
     reservation_type = models.ForeignKey(ReservationType)
     user = models.ForeignKey(User)
+    screening = models.ForeignKey(Screening)
+    seat = models.ManyToManyField(Seat)
 
     def __unicode__(self):
         return u"{0} {1} {2} {3}".format(
             self.reservation_date, self.reserved, self.paid, self.active)
-
-
-class Screening(models.Model):
-    screening_start = models.DateTimeField()
-    movie = models.ForeignKey(Movie)
-    auditorium = models.ForeignKey(Auditorium)
-    reserved_seats = models.ManyToManyField(Seat, through='SeatReserved')
-
-    def __unicode__(self):
-        return u"{0}".format(self.screening_start)
-
-
-class SeatReserved(models.Model):
-    reservation = models.ForeignKey(Reservation)
-    seat = models.ForeignKey(Seat)
-    Screening = models.ForeignKey(Screening)

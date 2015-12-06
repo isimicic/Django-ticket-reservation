@@ -8,7 +8,6 @@ admin.site.register(Seat)
 admin.site.register(ReservationType)
 admin.site.register(Reservation)
 admin.site.register(Screening)
-admin.site.register(SeatReserved)
 
 
 @admin.register(Cinema)

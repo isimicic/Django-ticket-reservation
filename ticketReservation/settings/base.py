@@ -117,6 +117,7 @@ STATIC_URL = os.path.join(PROJECT_PATH, 'static/')
 
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
+
 # MAIL
 EMAIL_HOST = 'mail.isimicic.com'
 EMAIL_HOST_USER = 'django@isimicic.com'
@@ -125,3 +126,7 @@ DEFAULT_FROM_EMAIL = 'djnago@isimicic.com'
 SERVER_EMAIL = 'django@isimicic.com'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
+
+# Site properties
+SITE_URL = 'www.xxx.com'
+SITE_NAME = 'xxx'

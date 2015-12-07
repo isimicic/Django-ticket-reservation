@@ -1,5 +1,8 @@
+{% extends "registration/registration_base.html" %}
 
+{% block title %} Log in | xxx {% endblock %}
 
+{% block content %}
 <form method="post" action="">
     {% csrf_token %}
     {{ form.as_p }}
@@ -9,8 +12,7 @@
 
 <p>Forgot your password?<a href="{% url 'auth_password_reset' %}">Reset it</a>.</p>
 <p>Not a member?<a href="{% url 'registration_register' %}">Register</a>.</p>
-
-
+{% endblock %}
 
 {% comment %}
 **registration/login.html**

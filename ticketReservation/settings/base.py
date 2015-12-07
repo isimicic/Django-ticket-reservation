@@ -37,6 +37,7 @@ PREREQ_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
 
 PROJECT_APPS = [
@@ -128,5 +129,4 @@ EMAIL_PORT = 25
 EMAIL_USE_TLS = False
 
 # Site properties
-SITE_URL = 'www.xxx.com'
-SITE_NAME = 'xxx'
+SITE_ID = 1

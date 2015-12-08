@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
+from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
 # our models
 from booking.models import Reservation
 
@@ -21,5 +21,11 @@ class ProfileIndexView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        self.publisher = get_object_or_404(self.model)
         return self.model.objects.filter(user=self.request.user.id)
+
+
+class ProfileSettingsView(LoginRequiredMixin, UpdateView):
+    template_name = 'accounts/updateProfile.html'
+
+    def get_queryset(self):
+        return self

@@ -5,45 +5,56 @@
 {% block content %}
 <div class="container">
     <h1>{{ user.username }} reservation status</h1>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Reservation date</th>
-                    <th>Payment status</th>
-                    <th>Reservation type</th>
-                    <th>Row</th>
-                    <th>Row number</th>
-                    <th>Movie</th>
-                    <th>Cinema</th>
-                    <th>Auditorium</th>
-                    <th>City</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for reservation in object_list %}
-                <tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
-                <td>{{ forloop.counter }}</td>
-                <td>{{ reservation.reservation_date }}</td>
-                <td>{{ reservation.paid }}</td>
-                <td>{{ reservation.reservation_type.type }}</td>
-                {% for seat in reservation.seat.all %}
-                <td>{{ seat.row }}</td>
-                <td>{{ seat.number }}</td>
-                {% endfor %}
-                <td>{{ reservation.screening.movie.title }}</td>
-                <td>{{ reservation.screening.auditorium.cinema.name }}</td>
-                <td>{{ reservation.screening.auditorium.name }}</td>
-                <td>{{ reservation.screening.auditorium.cinema.city.name }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                <td>No reservations yet.</td>
-                <tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Reservation date</th>
+                            <th>Payment status</th>
+                            <th>Reservation type</th>
+                            <th>Row</th>
+                            <th>Row number</th>
+                            <th>Movie</th>
+                            <th>Cinema</th>
+                            <th>Auditorium</th>
+                            <th>City</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for reservation in object_list %}
+                        <tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ reservation.reservation_date }}</td>
+                        <td>{% if reservation.paid %}<i class="fa fa-check-square-o"></i>{% else %}<i class="fa fa-square-o"></i>{% endif %}</td>
+                        <td>{{ reservation.reservation_type.type }}</td>
+                        {% for seat in reservation.seat.all %}
+                        <td>{{ seat.row }}</td>
+                        <td>{{ seat.number }}</td>
+                        {% endfor %}
+                        <td>{{ reservation.screening.movie.title }}</td>
+                        <td>{{ reservation.screening.auditorium.cinema.name }}</td>
+                        <td>{{ reservation.screening.auditorium.name }}</td>
+                        <td>{{ reservation.screening.auditorium.cinema.city.name }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                        <td>No reservations yet.</td>
+                        <tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-2">
+            Navigation
+            <ul>
+                <li><a href="{% url 'profile' %}">Reservations</a></li>
+                <li><a href="{% url 'profile_settings' %}">Settings</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}

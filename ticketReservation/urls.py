@@ -16,14 +16,17 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 # Our views
-from .views import IndexView, AboutUsView, ContactView, AccountsProfileView
+from .views import IndexView, AboutUsView, ContactView  # , AccountsProfileView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^city/', include('booking.urls')),
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^accounts/profile', AccountsProfileView.as_view(), name="profile"),
     url(r'^$', IndexView.as_view(), name='index'),
+
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^accounts/profile/', include('accounts.urls')),
+
     url(r'^about/$', AboutUsView.as_view(), name='about'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
+
+    url(r'^city/', include('booking.urls')),
 ]

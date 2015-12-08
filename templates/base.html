@@ -12,30 +12,29 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div id="header">
+        <div class="page-container">
             {% include "navigation.html" %}
-            {% block header %}
-            {% endblock %}     
-        </div>
 
-        <div id="content">
             {% block content %}
             {% endblock %}
+
+            <div class="footer-wrapper">
+                {% block footer %}
+                {% endblock %}
+            </div>
+
         </div>
-
-        <div id="footer">
-            {% block footer %}
-            {% endblock %}
-            <script type="text/javascript">
+        <script type="text/javascript">
             var url = window.location;
-                // Will only work if string in href matches with location
-                $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
-
+            // Will only work if string in href matches with location
+            $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
                 // Will also work for relative and absolute hrefs
                 $('ul.nav a').filter(function() {
                     return this.href == url;
-                }).parent().addClass('active');
-            </script>
-        </div>
+            }).parent().addClass('active');
+        </script>
+        {% block scripts %}
+        {% endblock %}
+
     </body>
 </html>

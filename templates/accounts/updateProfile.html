@@ -1,1 +1,13 @@
-update
+{% extends "base.html" %}
+
+{% block title %} Edit user profile {{ user.username }} | xxx {% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update" />
+    </form>
+    <a href="{% url 'auth_password_reset' %}">Change password</a>
+</div>
+{% endblock %}

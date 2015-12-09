@@ -3,10 +3,17 @@
 {% block title %} User profile for {{ user.username }} | xxx {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>{{ user.username }} reservation status</h1>
+
     <div class="row">
+        <div class="col-md-2">
+            Navigation
+            <ul>
+                <li><a href="{% url 'profile' %}">Reservations</a></li>
+                <li><a href="{% url 'edit' %}">Edit profile</a></li>
+            </ul>
+        </div>
         <div class="col-md-10">
+            <h1>{{ user.username }} reservation status</h1>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -48,13 +55,6 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-2">
-            Navigation
-            <ul>
-                <li><a href="{% url 'profile' %}">Reservations</a></li>
-                <li><a href="{% url 'profile_settings' %}">Settings</a></li>
-            </ul>
-        </div>
     </div>
-</div>
+
 {% endblock %}

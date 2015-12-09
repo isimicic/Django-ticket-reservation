@@ -5,6 +5,6 @@ from .views import ProfileIndexView, ProfileSettingsView
 
 urlpatterns = [
     url(r'^$', ProfileIndexView.as_view(), name='profile'),
-    url(r'^settings/$', ProfileSettingsView.as_view(),
-        name='profile_settings'),
+    url(r'^edit/$', ProfileSettingsView.as_view(),
+        name='edit'),
 ]

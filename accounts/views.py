@@ -1,11 +1,14 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 # our models
 from booking.models import Reservation
 
 
 class LoginRequiredMixin(object):
+
     @classmethod
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
@@ -25,7 +28,10 @@ class ProfileIndexView(LoginRequiredMixin, ListView):
 
 
 class ProfileSettingsView(LoginRequiredMixin, UpdateView):
+    model = User
+    success_url = reverse_lazy('index')
+    fields = ['first_name', 'last_name']
     template_name = 'accounts/updateProfile.html'
 
-    def get_queryset(self):
-        return self
+    def get_object(self):
+        return self.model.objects.get(pk=self.request.user.id)

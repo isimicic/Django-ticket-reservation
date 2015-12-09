@@ -42,6 +42,7 @@ PREREQ_APPS = [
 
 PROJECT_APPS = [
     'booking',
+    'imagekit',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
@@ -131,8 +132,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = os.path.join(PROJECT_PATH, 'static/')
+STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(PROJECT_PATH, "static", "static_root")
+
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_PATH, "static", "static"),
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_PATH, "static", "media_root")
 
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True

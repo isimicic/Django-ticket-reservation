@@ -1,9 +1,15 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 from django.contrib.auth.models import User
-from datetime import datetime
 
 
 class Movie(models.Model):
+    image = models.ImageField(upload_to='img')
+    image_thumbnail = ImageSpecField(source='image',
+                                     processors=[ResizeToFill(100, 50)],
+                                     format='JPEG',
+                                     options={'quality': 60})
     title = models.CharField(max_length=255)
     director = models.CharField(max_length=255)
     cast = models.TextField()
@@ -63,15 +69,16 @@ class ReservationType(models.Model):
 
 class Screening(models.Model):
     screening_start = models.DateTimeField()
+    screening_end = models.DateTimeField()
     movie = models.ForeignKey(Movie)
     auditorium = models.ForeignKey(Auditorium)
 
     def __unicode__(self):
-        return u"{0}".format(self.screening_start)
+        return u"{0} {1}".format(self.screening_start, self.screening_end)
 
 
 class Reservation(models.Model):
-    reservation_date = models.DateTimeField(default=datetime.now)
+    reservation_date = models.DateTimeField(auto_now=True)
     reserved = models.BooleanField(default=True)
     paid = models.BooleanField(default=True)
     active = models.BooleanField(default=True)

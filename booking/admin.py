@@ -1,13 +1,19 @@
 from django.contrib import admin
-from models import *
+from imagekit.admin import AdminThumbnail
+from .models import *
 
-admin.site.register(Movie)
 
 admin.site.register(Auditorium)
 admin.site.register(Seat)
 admin.site.register(ReservationType)
 admin.site.register(Reservation)
 admin.site.register(Screening)
+
+
+@admin.register(Movie)
+class MovieAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', 'admin_thumbnail')
+    admin_thumbnail = AdminThumbnail(image_field='image_thumbnail')
 
 
 @admin.register(Cinema)

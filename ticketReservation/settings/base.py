@@ -84,17 +84,11 @@ WSGI_APPLICATION = 'ticketReservation.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'isimicic_DjangoTest',
-        'USER': 'isimicic_django',
-        'PASSWORD': 'django',
-        'HOST': 'isimicic.com',
-        'PORT': '',
-        'OPTIONS': {
-            "init_command": "SET storage_engine=INNODB",
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(PROJECT_PATH, 'db.sqlite3'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

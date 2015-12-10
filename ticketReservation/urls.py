@@ -25,12 +25,11 @@ urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
 
     url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^accounts/profile/', include('accounts.urls')),
+    url(r'^accounts/', include('accounts.urls')),
 
     url(r'^about/$', AboutUsView.as_view(), name='about'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
 
-    url(r'^city/', include('booking.urls')),
 ]
 
 if settings.DEBUG:

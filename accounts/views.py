@@ -29,7 +29,7 @@ class ProfileIndexView(LoginRequiredMixin, ListView):
 
 class ProfileSettingsView(LoginRequiredMixin, UpdateView):
     model = User
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('profile')
     fields = ['first_name', 'last_name']
     template_name = 'accounts/updateProfile.html'
 

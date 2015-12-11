@@ -8,7 +8,6 @@ from booking.models import Reservation
 
 
 class LoginRequiredMixin(object):
-
     @classmethod
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
@@ -28,10 +27,10 @@ class ProfileIndexView(LoginRequiredMixin, ListView):
 
 
 class ProfileSettingsView(LoginRequiredMixin, UpdateView):
-    model = User
-    success_url = reverse_lazy('profile')
-    fields = ['first_name', 'last_name']
     template_name = 'accounts/updateProfile.html'
+    model = User
+    fields = ['username', 'first_name', 'last_name']
+    success_url = reverse_lazy('profile')
 
     def get_object(self):
         return self.model.objects.get(pk=self.request.user.id)

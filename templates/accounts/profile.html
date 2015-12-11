@@ -3,17 +3,7 @@
 {% block title %} User profile for {{ user.username }} | xxx {% endblock %}
 
 {% block content %}
-
-    <div class="row">
-        <div class="col-md-2">
-            Navigation
-            <ul>
-                <li><a href="{% url 'profile' %}">Reservations</a></li>
-                <li><a href="{% url 'edit' %}">Edit profile</a></li>
-            </ul>
-        </div>
-        <div class="col-md-10">
-            <h1>{{ user.username }} reservation status</h1>
+<div class="container">
             {% if object_list.count == 0 %}
                 <p>No reservations yet.</p>
             {% else %}
@@ -54,7 +44,5 @@
                 </table>
             </div>
             {% endif %}
-        </div>
-    </div>
-
+</div>
 {% endblock %}

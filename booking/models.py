@@ -4,6 +4,13 @@ from imagekit.processors import ResizeToFill
 from django.contrib.auth.models import User
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return u"{0}".format(self.name)
+
+
 class Movie(models.Model):
     image = models.ImageField(upload_to='img')
     image_thumbnail = ImageSpecField(source='image',
@@ -15,6 +22,10 @@ class Movie(models.Model):
     cast = models.TextField()
     description = models.TextField()
     duration = models.PositiveSmallIntegerField()
+    review_grade = models.PositiveSmallIntegerField()
+    categories = models.ManyToManyField(Category)
+    release_date = models.DateTimeField()
+    now_playing = models.BooleanField()
 
     def __unicode__(self):
         return u"{0} {1} {2} {3} {4}".format(

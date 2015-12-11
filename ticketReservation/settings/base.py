@@ -43,6 +43,7 @@ PREREQ_APPS = [
 PROJECT_APPS = [
     'booking',
     'imagekit',
+    'widget_tweaks',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
@@ -151,3 +152,5 @@ EMAIL_USE_TLS = False
 
 # Site properties
 SITE_ID = 1
+
+LOGIN_REDIRECT_URL = "/accounts/"

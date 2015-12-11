@@ -1,33 +1,113 @@
 {% load staticfiles %}
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title>{% block title %}{% endblock %}</title>
-        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-       
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-        
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta name="description" content="A Template by Gozha.net">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Gozha.net">
+    
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="telephone=no" name="format-detection">
+    
+    <!-- Fonts -->
+    <!-- Font awesome - icon font -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <!-- Roboto -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,700' rel='stylesheet' type='text/css'>
+    <!-- Open Sans -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800italic' rel='stylesheet' type='text/css'>
+    
+    <!-- Stylesheets -->
+
+    <!-- Mobile menu -->
+    <link href="{% static "css/gozha-nav.css" %}" rel="stylesheet" />
+    <!-- Select -->
+    <link href="{% static "css/external/jquery.selectbox.css" %}" rel="stylesheet" />
+
+    <!-- REVOLUTION BANNER CSS SETTINGS -->
+    <link rel="stylesheet" type="text/css" href="{% static "rs-plugin/css/settings.css" %}" media="screen" />
+    
+    <!-- Custom -->
+    <link href="{% static "css/style.css" %}" rel="stylesheet" />
+
+
+    <!-- Modernizr --> 
+    <script src="{% static "js/external/modernizr.custom.js" %}" ></script>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --> 
+    <!--[if lt IE 9]> 
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script> 
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>       
+        <![endif]-->
     </head>
+
     <body>
-        <div class="page-container">
-            {% include "navigation.html" %}
+        <div class="wrapper">
+            <!-- Banner -->
+            <div class="banner-top">
+                <img alt='top banner' src="http://placehold.it/1600x90">
+            </div>
+            <!-- Header section -->
+            <header class="header-wrapper">
+                {% include "navigation.html" %}
+            </header>
 
             {% block content %}
+
             {% endblock %}
 
-            <div class="footer-wrapper">
+
+            <div class="clearfix"></div>
+            <footer class="footer-wrapper">
                 {% block footer %}
                 {% endblock %}
+                {% include "footer.html"%}
             </div>
+        </footer>
+        
+    </div>
 
-        </div>
-        <script src="{% static "js/menu_active.js" %}"></script>
-        {% block scripts %}
-        {% endblock %}
+    {% block bottom %}
 
-    </body>
+    {% endblock %}
+    {% include "open-close.html"%}
+    <!-- JavaScript-->
+    <!-- jQuery 1.9.1--> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{% static "js/external/jquery-1.10.1.min.js" %}"><\/script>')</script>
+    <!-- Migrate --> 
+    <script src="{% static "js/external/jquery-migrate-1.2.1.min.js" %}"></script>
+    <!-- Bootstrap 3--> 
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <!-- jQuery REVOLUTION Slider -->
+    <script type="text/javascript" src="{% static "rs-plugin/js/jquery.themepunch.plugins.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "rs-plugin/js/jquery.themepunch.revolution.min.js" %}"></script>
+    <!-- Mobile menu -->
+    <script src="{% static "js/jquery.mobile.menu.js" %}"></script>
+    <!-- Select -->
+    <script src="{% static "js/external/jquery.selectbox-0.2.min.js" %}"></script>
+    <!-- Stars rate -->
+    <script src="{% static "js/external/jquery.raty.js" %}"></script>
+    <!-- Form element -->
+    <script src="{% static "js/external/form-element.js" %}"></script>
+    <!-- Form validation -->
+    <script src="{% static "js/form.js" %}"></script>
+    <!-- Twitter feed 
+    <script src="{% static "js/external/twitterfeed.js" %}"></script>-->
+    <!-- Custom -->
+    <script src="{% static "js/custom.js" %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            init_Home();
+        });
+    </script>
+    {% block script %}
+    
+    {% endblock %}
+</body>
 </html>

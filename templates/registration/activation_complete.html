@@ -3,12 +3,16 @@
 {% block title %} Account Activated | xxx {% endblock %}
 
 {% block content %}
-<p>
-    Your account is now activated.
-    {% if not user.is_authenticated %}
-    You can log in.
-    {% endif %}
-</p>
+<div id="login-form" class="log">
+    <p class="login__title">congratulations<br><span class="login-edition">Your account is now activated.</span></p>
+</div>
+<script>
+
+setTimeout(function(){
+   window.location.href = "/accounts/";
+}, 3000);
+
+</script>
 {% endblock %}
 
 

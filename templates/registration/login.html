@@ -3,41 +3,29 @@
 {% block title %} Log in | {{ site.name }} {% endblock %}
 
 {% block content %}
-<form method="post" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Log in" />
-    <input type="hidden" name="next" value="{{ next }}" />
+<form id="login-form" class="log" method="post" action="">{% csrf_token %}
+    <p class="login__title">sign in <br><span class="login-edition">welcome to {{ site.name }}</span></p>
+    <div class="social social--colored">
+        <a href='#' class="social__variant fa fa-facebook"></a>
+        <a href='#' class="social__variant fa fa-twitter"></a>
+        <a href='#' class="social__variant fa fa-tumblr"></a>
+    </div>
+
+    <p class="login__tracker">or</p>
+
+    <div class="field-wrap">
+        {% load widget_tweaks %}
+        {{ form.username|attr:"class:login__input"|attr:"placeholder:Username" }}
+        {{ form.password|add_class:"login__input"|attr:"placeholder:Password" }}
+        <p></p>
+    </div>
+    
+    <div class="login__control">
+        <button type='submit' class="btn btn-md btn--warning btn--wider">sign in</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+        <a href="{% url 'auth_password_reset' %}" class="login__tracker form__tracker">Forgot your password?</a>
+        <a href="{% url 'registration_register' %}" class="login__tracker form__tracker">Not a member?</a>
+    </div>
 </form>
 
-<p>Forgot your password?<a href="{% url 'auth_password_reset' %}">Reset it</a>.</p>
-<p>Not a member?<a href="{% url 'registration_register' %}">Register</a>.</p>
 {% endblock %}
-
-{% comment %}
-**registration/login.html**
-
-It's your responsibility to provide the login form in a template called
-registration/login.html by default. This template gets passed four
-template context variables:
-
-``form``
-    A Form object representing the login form. See the forms
-    documentation for more on Form objects.
-
-``next``
-    The URL to redirect to after successful login. This may contain a
-    query string, too.
-
-``site``
-    The current Site, according to the SITE_ID setting. If you don't
-    have the site framework installed, this will be set to an instance
-    of RequestSite, which derives the site name and domain from the
-    current HttpRequest.
-
-``site_name``
-    An alias for site.name. If you don't have the site framework
-    installed, this will be set to the value of
-    request.META['SERVER_NAME']. For more on sites, see The
-    "sites" framework.
-{% endcomment %}

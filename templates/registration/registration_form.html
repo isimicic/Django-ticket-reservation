@@ -1,12 +1,30 @@
 {% extends "registration/registration_base.html" %}
 
-{% block title %} User registration | xxx {% endblock%}
+{% block title %} User registration | {{ site.name }} {% endblock%}
 
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Register">
+<form id="login-form" class="log" method="post" action="">{% csrf_token %}
+    <p class="login__title">sign up <br><span class="login-edition">welcome to {{ site.name }}</span></p>
+    <div class="social social--colored">
+        <a href='#' class="social__variant fa fa-facebook"></a>
+        <a href='#' class="social__variant fa fa-twitter"></a>
+        <a href='#' class="social__variant fa fa-tumblr"></a>
+    </div>
+
+    <p class="login__tracker">or</p>
+
+    <div class="field-wrap">
+        {% load widget_tweaks %}
+        {{ form.username|attr:"class:login__input"|attr:"placeholder:Username" }}
+        {{ form.email|attr:"class:login__input"|attr:"placeholder:Email" }}
+        {{ form.password1|add_class:"login__input"|attr:"placeholder:Password" }}
+        {{ form.password2|add_class:"login__input"|attr:"placeholder:Repeat password" }}
+        <p></p>
+    </div>
+    
+    <div class="login__control">
+        <button type='submit' value="Register" class="btn btn-md btn--warning btn--wider">sign in</button>
+    </div>
 </form>
 {% endblock %}
 

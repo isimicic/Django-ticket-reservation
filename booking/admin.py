@@ -9,6 +9,11 @@ class AuditoriumAdmin(admin.ModelAdmin):
     list_filter = ('name', 'seats_number')
 
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+
+
 @admin.register(Cinema)
 class CinemaAdmin(admin.ModelAdmin):
     list_display = ('name', 'address',

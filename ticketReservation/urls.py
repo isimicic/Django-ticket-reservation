@@ -20,6 +20,7 @@ from django.contrib import admin
 # Our views
 from .views import IndexView, AboutUsView, ContactView  # , AccountsProfileView
 
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', IndexView.as_view(), name='index'),

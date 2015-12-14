@@ -6,35 +6,30 @@
             {% if movies.count == 0 %}
                 <p>No Movies yet.</p>
             {% else %}
-            {% for movie in movies %}         
-                                      <!--movie--test--ligth movie--test--right-->
-            {% if forloop.counter|divisibleby:2 %}
-                <div class="movie movie--test movie--test--light movie--test--left">
-            {% else %}
-                <div class="movie movie--test movie--test--dark movie--test--left">
-            {% endif %}
-                <div class="movie__images">
-                    <a href="#" class="movie-beta__link">
-                        <img alt='' src="{{ MEDIA_URL }}{{movie.image_thumbnail}}">
-                    </a>
+            {% for movie in movies %}
+                <div {% cycle 'class="movie movie--test movie--test--dark movie--test--left"' 'class="movie movie--test movie--test--light movie--test--left"' 'class="movie movie--test movie--test--light movie--test--right"' 'class="movie movie--test movie--test--dark movie--test--right"' %}>
+                    <div class="movie__images">
+                        <a href="{% url 'movie' movie.id %}" class="movie-beta__link">
+                            <img alt='' src="{{ MEDIA_URL }}{{movie.image_thumbnail}}">
+                        </a>
+                    </div>
+                    <div class="movie__info">
+                        <a href='{% url 'movie' movie.id %}' class="movie__title">{{ movie.title }} ({{ movie.release_date|date:"Y" }})  </a>
+                        <p class="movie__time">{{ movie.duration }} min</p>
+                        <p class="movie__option">
+                            {% for category in movie.categories.all %}
+                                <a href="#">{{ category.name }}</a>
+                                {% if not forloop.last %}
+                                    |                             
+                                {% endif%}
+                            {% endfor %}
+                        </p>
+                        <div class="movie__rate">
+                            <div class="score"></div>
+                            <span class="movie__rating">{{ movie.review_grade }}</span>
+                        </div>               
+                    </div>
                 </div>
-                <div class="movie__info">
-                    <a href='#' class="movie__title">{{ movie.title }} ({{ movie.release_date|date:"Y" }})  </a>
-                    <p class="movie__time">{{ movie.duration }} min</p>
-                    <p class="movie__option">
-                        {% for category in movie.categories.all %}
-                            <a href="#">{{ category.name }}</a>
-                            {% if not forloop.last %}
-                                |                             
-                            {% endif%}
-                        {% endfor %}
-                    </p>
-                    <div class="movie__rate">
-                        <div class="score"></div>
-                        <span class="movie__rating">{{ movie.review_grade }}</span>
-                    </div>               
-                </div>
-            </div>
             {% endfor %}
             {% endif %}
             {# {% include "includes/social.html"%} #}

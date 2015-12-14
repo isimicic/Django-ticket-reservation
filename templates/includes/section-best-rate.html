@@ -4,20 +4,8 @@
     <div class="col-sm-12 change--col">
         
         {% for movie in movies %} 
-            {% if forloop.counter == 1 %}    
-                <div class="movie-beta__item ">
-            {% elif forloop.counter == 2 %}
-                <div class="movie-beta__item second-item">
-            {% elif forloop.counter == 3 %}
-                <div class="movie-beta__item third-item">
-            {% elif forloop.counter == 4 %}
-                <div class="movie-beta__item hidden-xs">
-            {% elif forloop.counter == 5 %}
-                <div class="movie-beta__item hidden-xs hidden-sm">
-                {% elif forloop.counter == 6 %}
-                <div class="movie-beta__item hidden-xs hidden-sm">
-            {% endif %}
-
+            
+            <div {% cycle 'class="movie-beta__item"' 'class="movie-beta__item second-item"' 'class="movie-beta__item third-item"' 'class="movie-beta__item hidden-xs"' 'class="movie-beta__item hidden-xs hidden-sm"' 'class="movie-beta__item hidden-xs hidden-sm"' %}>
                 <img alt='' src="{{ MEDIA_URL }}{{movie.image_thumbnail}}">
                 <span class="best-rate">5.0</span>
                 <ul class="movie-beta__info">

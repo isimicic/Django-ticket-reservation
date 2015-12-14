@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/', include('accounts.urls')),
 
+    url(r'^cinema/', include('booking.urls')),
+
     url(r'^about/$', AboutUsView.as_view(), name='about'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
 

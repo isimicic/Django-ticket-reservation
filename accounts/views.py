@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 # our models
 from booking.models import Reservation
+from .models import User_profile
 
 
 class LoginRequiredMixin(object):

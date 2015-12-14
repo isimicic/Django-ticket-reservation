@@ -1,0 +1,50 @@
+{% load staticfiles%}
+<div class="movie-best">
+    <div class="col-sm-10 col-sm-offset-1 movie-best__rating">Today Best choice</div>
+    <div class="col-sm-12 change--col">
+        
+        {% for movie in movies %} 
+            {% if forloop.counter == 1 %}    
+                <div class="movie-beta__item ">
+            {% elif forloop.counter == 2 %}
+                <div class="movie-beta__item second-item">
+            {% elif forloop.counter == 3 %}
+                <div class="movie-beta__item third-item">
+            {% elif forloop.counter == 4 %}
+                <div class="movie-beta__item hidden-xs">
+            {% elif forloop.counter == 5 %}
+                <div class="movie-beta__item hidden-xs hidden-sm">
+                {% elif forloop.counter == 6 %}
+                <div class="movie-beta__item hidden-xs hidden-sm">
+            {% endif %}
+
+                <img alt='' src="{{ MEDIA_URL }}{{movie.image_thumbnail}}">
+                <span class="best-rate">5.0</span>
+                <ul class="movie-beta__info">
+                    <li><span class="best-voted">71 people voted today</span></li>
+                    <li>
+                        <p class="movie__time">{{ movie.duration }} min</p>    <p>                    
+                        {% for category in movie.categories.all %}
+                            {{ category.name }}
+                            {% if not forloop.last %}
+                                |                             
+                            {% endif%}
+
+                        {% endfor %}</p>
+                        <p>38 comments</p>
+                    </li>
+                    <li class="last-block">
+                        <a href="movie-page-left.html" class="slide__link">more</a>
+                    </li>
+                </ul>
+            </div>        
+        {% endfor %}
+                      
+    </div>
+    <div class="col-sm-10 col-sm-offset-1 movie-best__check">check all movies now playing</div>
+</div>
+
+{#{% include "includes/search.html" %}#}
+
+<div class="clearfix"></div>
+

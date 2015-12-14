@@ -3,5 +3,14 @@
 {% block title %}Logged out | {{ site.name }} {% endblock %}
 
 {% block content %}
-<p>Successfully logged out.</p>
+<div id="login-form" class="log">
+    <p class="login__title">Successfully logged out.</p>
+</div>
+<script>
+
+setTimeout(function(){
+   window.location.href = "/";
+}, 3000);
+
+</script>
 {% endblock %}

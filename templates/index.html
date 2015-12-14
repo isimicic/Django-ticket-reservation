@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %} Welcome to {{ site.name }} | {{ site.name }} {% endblock %}
+{% load staticfiles%}
+{% block content %}
+    {#{% include "includes/banner.html" %}#}
+    <section class="container">
+        {% include "includes/section-best-rate.html" %}
+    {% include "includes/now-in-cinema.html" %}
+    
+</section>
+{% endblock %}

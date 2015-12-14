@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+AUTH_PROFILE_MODULE = 'accounts.User_profile'
 MAIN_PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 
@@ -43,6 +43,7 @@ PREREQ_APPS = [
 PROJECT_APPS = [
     'booking',
     'imagekit',
+    'accounts',
     'widget_tweaks',
 ]
 
@@ -72,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
             ],
         },
     },

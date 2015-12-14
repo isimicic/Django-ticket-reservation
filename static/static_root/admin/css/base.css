@@ -965,3 +965,8 @@ table#change-history tbody th {
 .popup #header {
     padding: 10px 20px;
 }
+
+img{
+    height:100px;
+    width:100px;
+}

@@ -54,7 +54,7 @@
             </div>
             <!-- Header section -->
             <header class="header-wrapper">
-                {% include "navigation.html" %}
+                {% include "includes/navigation.html" %}
             </header>
 
             {% block content %}
@@ -66,7 +66,7 @@
             <footer class="footer-wrapper">
                 {% block footer %}
                 {% endblock %}
-                {% include "footer.html"%}
+                {% include "includes/footer.html"%}
             </div>
         </footer>
         
@@ -75,7 +75,7 @@
     {% block bottom %}
 
     {% endblock %}
-    {% include "open-close.html"%}
+    {% include "includes/open-close.html"%}
     <!-- JavaScript-->
     <!-- jQuery 1.9.1--> 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -106,7 +106,7 @@
             init_Home();
         });
     </script>
-    {% block script %}
+    {% block scripts %}
     
     {% endblock %}
 </body>

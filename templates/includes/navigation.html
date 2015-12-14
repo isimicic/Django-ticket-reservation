@@ -135,9 +135,11 @@
         <div class="auth auth--home">
             {% if user.is_authenticated %}        
             <div class="auth__show">
+              {% if user.User_profile.image %}
                 <span class="auth__image">
-                    <img alt="" src="http://placehold.it/31x31">
+                    <img alt="" src="{{ MEDIA_URL }}{{user.User_profile.image}}">
                 </span>
+              {% endif %}
             </div>
             <a href="#" class="btn btn--sign btn--singin">me</a>
             <ul class="auth__function">
@@ -156,8 +158,6 @@
                 </ul>
             {%endif%}
         </div>
-        {% if user.is_authenticated %} 
-        <a href="#" class="btn btn-md btn--warning btn--book btn-control--home">Book a ticket</a>
-        {%endif%}
+          <a href="#" class="btn btn-md btn--warning btn--book btn-control--home">Book a ticket</a>
     </div>
 </div>

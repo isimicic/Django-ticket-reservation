@@ -29,11 +29,17 @@ class CityAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ('image', 'image_thumbnail', 'movie')
+    list_filter = ('movie',)
+
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('admin_thumbnail', 'title', 'director', 'duration')
-    list_display = ('title', 'director', 'duration')
-    admin_thumbnail = AdminThumbnail(image_field='image_thumbnail')
+    list_display = ('title', 'director', 'duration', 'movie_thumbnail')
+    list_filter = ('title', 'director', 'duration')
+    movie_thumbnail = AdminThumbnail(image_field='image_thumbnail')
 
 
 @admin.register(ReservationType)

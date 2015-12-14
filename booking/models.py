@@ -2,6 +2,11 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from django.contrib.auth.models import User
+import os
+
+
+def get_image_path(instance, filename):
+    return os.path.join('images/movie', str(instance.title), filename)
 
 
 class Category(models.Model):
@@ -12,9 +17,9 @@ class Category(models.Model):
 
 
 class Movie(models.Model):
-    image = models.ImageField(upload_to='img')
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     image_thumbnail = ImageSpecField(source='image',
-                                     processors=[ResizeToFill(100, 50)],
+                                     processors=[ResizeToFill(424, 424)],
                                      format='JPEG',
                                      options={'quality': 60})
     title = models.CharField(max_length=255)
@@ -22,7 +27,7 @@ class Movie(models.Model):
     cast = models.TextField()
     description = models.TextField()
     duration = models.PositiveSmallIntegerField()
-    review_grade = models.PositiveSmallIntegerField()
+    review_grade = models.PositiveSmallIntegerField(default=0)
     categories = models.ManyToManyField(Category)
     release_date = models.DateTimeField()
     now_playing = models.BooleanField()
@@ -31,6 +36,15 @@ class Movie(models.Model):
         return u"{0} {1} {2} {3} {4}".format(
             self.title, self.director, self.cast,
             self.description, self.duration)
+
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    image_thumbnail = ImageSpecField(source='image',
+                                     processors=[ResizeToFill(100, 50)],
+                                     format='JPEG',
+                                     options={'quality': 60})
+    movie = models.ForeignKey(Movie)
 
 
 class City(models.Model):

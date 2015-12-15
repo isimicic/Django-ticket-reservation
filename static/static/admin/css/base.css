@@ -966,6 +966,6 @@ table#change-history tbody th {
     padding: 10px 20px;
 }
 
-img{
+.field-movie_thumbnail img{
     width:100px;
 }

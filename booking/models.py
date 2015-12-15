@@ -31,6 +31,9 @@ class Movie(models.Model):
     categories = models.ManyToManyField(Category)
     release_date = models.DateTimeField()
     now_playing = models.BooleanField()
+    country = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    age_restriction = models.CharField(max_length=2, null=True, blank=True)
 
     def __unicode__(self):
         return u"{0} {1} {2} {3} {4}".format(

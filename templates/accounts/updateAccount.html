@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %} Edit user profile {{ user.username }} | {{ site.name }} {% endblock %}
+
+{% block content %}
+<form id="login-form" class="log" method="post" action="">{% csrf_token %}
+    <p class="login__title">Edit your account</p>
+    
+    <div class="field-wrap">
+        {% load widget_tweaks %}
+        <span class="login-edition">Username</span>
+        {{ form.username|attr:"class:login__input"|attr:"placeholder:Username" }}
+        <span class="login-edition">First name</span>
+        {{ form.first_name|add_class:"login__input"|attr:"placeholder:First name" }}
+        <span class="login-edition">Last name</span>
+        {{ form.last_name|add_class:"login__input"|attr:"placeholder:Last name" }}
+        <a href="{% url 'auth_password_change' %}">Change password</a>
+        <p></p>
+    </div>
+    
+    <div class="login__control">
+        <button type='submit' class="btn btn-md btn--warning btn--wider">Update</button>
+    </div>
+</form>
+
+{% endblock %}

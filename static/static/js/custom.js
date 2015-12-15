@@ -1122,7 +1122,7 @@ function init_MoviePage () {
     //2. Swiper slider
     //Media slider
                 //init employee sliders
-                var mySwiper = new Swiper('.swiper-container',{
+               /* var mySwiper = new Swiper('.swiper-container',{
                     slidesPerView:4,
                   });
 
@@ -1275,7 +1275,7 @@ function init_MoviePage () {
                           toggle = false;
                     });
                 });
-
+    */
     //4. Dropdown init 
 				//select
                 $("#select-sort").selectbox({

@@ -13,7 +13,7 @@
             <div class="movie__info">
                 <div class="col-sm-6 col-md-4 movie-mobile">
                     <div class="movie__images">
-                        <span class="movie__rating">5.0</span>
+                        <span class="movie__rating">{{ object.get_avg_rating|floatformat }}</span>
                         <img alt='' src="{{MEDIA_URL}}{{object.image_thumbnail}}">
                     </div>
                     <div class="movie__rate">Your vote: <div id='score' class="score"></div>
@@ -223,8 +223,26 @@
 <script src="{% static "js/custom.js" %}"></script>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    init_MoviePage();
-});
+    $(document).ready(function() {
+        init_MoviePage();
+
+        $.fn.raty.defaults.path = "{{ STATIC_URL }}images/rate";
+        $.fn.raty.defaults.size = 24;
+            
+        $.fn.raty.defaults.starOn = "star-on.png";
+        $.fn.raty.defaults.starHalf = "star-half.png";
+        $.fn.raty.defaults.half = true;
+        $.fn.raty.defaults.single = false;
+            
+        $('.score').raty({
+            half: false,
+            score: function() {
+                return $(this).attr('data-score');
+            },
+            cancel: false,
+            readOnly: true,
+            score: "{{vote.rating}}"
+        });
+    });
 </script>
 {% endblock%}

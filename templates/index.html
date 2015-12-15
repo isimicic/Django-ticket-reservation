@@ -79,8 +79,7 @@
                             200: function(data, textStatus, jqXHR) {
                                 obj = $.parseJSON(data);
                                 $('.movieScoreId'+obj.movieId.toString()).text(obj.avg.toFixed(1));
-                                $('.score#movieId'+obj.movieId).raty('set', {readOnly: false, score: obj.rating });
-                                $('.score#movieId'+obj.movieId).raty('set', {readOnly: true });
+                                $('.score#movieId'+obj.movieId).raty('set', {readOnly: true, score: obj.rating });
                             }
                         }
                     });

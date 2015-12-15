@@ -43,9 +43,51 @@
 <!-- Custom -->
 <script src="{% static "js/custom.js" %}"></script>
 
+
+
 <script type="text/javascript">
-  $(document).ready(function() {
-    init_Home();
-});
-</script>
+        $(document).ready(function() {
+            $.fn.raty.defaults.path = "{{ STATIC_URL }}images/rate";
+            $.fn.raty.defaults.size = 24;
+            
+            $.fn.raty.defaults.starOn = "star-on.png";
+            $.fn.raty.defaults.starHalf = "star-half.png";
+            $.fn.raty.defaults.half = true;
+            $.fn.raty.defaults.single = false;
+            
+            $('.score').raty({
+                half: false,
+                score: function() {
+                    return $(this).attr('data-score');
+                },
+                click: function(score, evt) {
+                    var current_rating = 0;
+                    if (score != null) {
+                        current_rating = score;
+                    }
+                    movieId = $(this).attr('movieId');
+                    $.ajax({
+                        url: "{% url 'rating' %}",
+                        type: "POST",
+                        data: { 'rating': current_rating, 'movieId': movieId, 
+                                'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                        statusCode: {
+                            403: function(jqXHR, textStatus, errorThrown) {
+                                // invalid rating was posted
+                                console.log(errorThrown);
+                            },
+                            200: function(data, textStatus, jqXHR) {
+                                obj = $.parseJSON(data);
+                                $('.movieScoreId'+obj.movieId.toString()).text(obj.avg.toFixed(1));
+                                $('.score#movieId'+obj.movieId).raty('set', {readOnly: false, score: obj.rating });
+                                $('.score#movieId'+obj.movieId).raty('set', {readOnly: true });
+                            }
+                        }
+                    });
+                },
+                cancel: false
+            });
+        });
+    </script>
+
 {% endblock%}

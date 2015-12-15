@@ -3,6 +3,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from django.contrib.auth.models import User
 import os
+from django.db.models import Avg
 
 
 def get_image_path(instance, filename):
@@ -16,6 +17,15 @@ class Category(models.Model):
         return u"{0}".format(self.name)
 
 
+class MovieManager(models.Manager):
+    """Adds custom methods to Show model."""
+    def top_rated(self):
+        return self.annotate(score=Avg('rated_movie__rating')).order_by('-score')
+
+    def most_rated(self):
+        return self.annotate(score=Avg('rated_movie')).order_by('-score')
+
+
 class Movie(models.Model):
     image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     image_thumbnail = ImageSpecField(source='image',
@@ -27,7 +37,6 @@ class Movie(models.Model):
     cast = models.TextField()
     description = models.TextField()
     duration = models.PositiveSmallIntegerField()
-    review_grade = models.PositiveSmallIntegerField(default=0)
     categories = models.ManyToManyField(Category)
     release_date = models.DateTimeField()
     now_playing = models.BooleanField()
@@ -35,19 +44,21 @@ class Movie(models.Model):
     city = models.CharField(max_length=255)
     age_restriction = models.CharField(max_length=2, null=True, blank=True)
 
+    objects = MovieManager()
+
+    def get_avg_rating(self):
+        """Returns the average rating for a Movie."""
+        if self.rated_movie.all():
+            return self.rated_movie.aggregate(Avg('rating'))['rating__avg']
+        else:
+            return 0.00
+
+    def get_rating_votes(self):
+        """Returns all rating votes for a show."""
+        return self.rated_movie.all().count()
+
     def __unicode__(self):
-        return u"{0} {1} {2} {3} {4}".format(
-            self.title, self.director, self.cast,
-            self.description, self.duration)
-
-
-class Gallery(models.Model):
-    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
-    image_thumbnail = ImageSpecField(source='image',
-                                     processors=[ResizeToFill(100, 50)],
-                                     format='JPEG',
-                                     options={'quality': 60})
-    movie = models.ForeignKey(Movie)
+        return u"Name: {0}, Director: {1}".format(self.title, self.director)
 
 
 class City(models.Model):

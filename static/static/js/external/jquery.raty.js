@@ -142,7 +142,7 @@
       self.cancel.on('mouseover.raty', function(evt) {
         $(this).attr('src', self.opt.path + self.opt.cancelOn);
 
-        self.stars.attr('src', '/static/' + self.opt.path + self.opt.starOff);
+        self.stars.attr('src', self.opt.path + self.opt.starOff);
 
         methods._target.call(self, null, evt);
 
@@ -191,7 +191,7 @@
       }
     }, _createCancel: function() {
       var that   = $(this),
-          icon   = '/static/' + this.opt.path + this.opt.cancelOff,
+          icon   = this.opt.path + this.opt.cancelOff,
           cancel = $('<img />', { src: icon, alt: 'x', title: this.opt.cancelHint, 'class': 'raty-cancel' });
 
       if (this.opt.cancelPlace == 'left') {
@@ -202,7 +202,7 @@
 
       return cancel;
     }, _createScore: function() {
-      return $('<input />', { type: 'hidden', name: this.opt.scoreName }).appendTo(this);
+      return $('<input />', { type: 'hidden', name: this.opt.scoreName}).appendTo(this);
     }, _createStars: function() {
       var that = $(this);
 
@@ -210,8 +210,8 @@
         var title = methods._getHint.call(this, i),
             icon  = (this.opt.score && this.opt.score >= i) ? 'starOn' : 'starOff';
 
-        icon = '/static/' + this.opt.path + this.opt[icon];
-
+        icon = this.opt.path + this.opt[icon];
+        
         $('<img />', { src : icon, alt: i, title: title }).appendTo(this);
 
         if (this.opt.space) {
@@ -248,7 +248,7 @@
         } else {
           var icon = select ? 'starOn' : 'starOff';
 
-          star.attr('src', '/static/' + this.opt.path + this.opt[icon]);
+          star.attr('src', this.opt.path + this.opt[icon]);
         }
       }
     }, _getHint: function(score) {

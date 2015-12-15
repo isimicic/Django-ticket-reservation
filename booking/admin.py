@@ -1,6 +1,7 @@
 from django.contrib import admin
 from imagekit.admin import AdminThumbnail
 from .models import *
+from rating.models import Rating
 
 
 @admin.register(Auditorium)
@@ -29,14 +30,15 @@ class CityAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
-@admin.register(Gallery)
-class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('image', 'image_thumbnail', 'movie')
-    list_filter = ('movie',)
+class RatingInline(admin.StackedInline):
+    """Rating Inline."""
+    model = Rating
+    extra = 1
 
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
+    inlines = [RatingInline]
     list_display = ('title', 'director', 'duration', 'movie_thumbnail')
     list_filter = ('title', 'director', 'duration')
     movie_thumbnail = AdminThumbnail(image_field='image_thumbnail')

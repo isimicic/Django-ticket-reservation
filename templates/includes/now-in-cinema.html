@@ -10,7 +10,7 @@
                 <div {% cycle 'class="movie movie--test movie--test--dark movie--test--left"' 'class="movie movie--test movie--test--light movie--test--left"' 'class="movie movie--test movie--test--light movie--test--right"' 'class="movie movie--test movie--test--dark movie--test--right"' %}>
                     <div class="movie__images">
                         <a href="{% url 'movie' movie.id %}" class="movie-beta__link">
-                            <img alt='' src="{{ MEDIA_URL }}{{movie.image_thumbnail}}">
+                            <img alt='' src="{{ MEDIA_URL }}{{movie.image_thumbnail}}" id="{{ movie.id }}">
                         </a>
                     </div>
                     <div class="movie__info">
@@ -25,8 +25,8 @@
                             {% endfor %}
                         </p>
                         <div class="movie__rate">
-                            <div class="score"></div>
-                            <span class="movie__rating">{{ movie.review_grade }}</span>
+                            <div class="score" id="movieId{{movie.id}}" movieID="{{ movie.id }}"></div>
+                            <span class="movie__rating movieScoreId{{ movie.id }}">{{ movie.get_avg_rating|floatformat }}</span>
                         </div>               
                     </div>
                 </div>

@@ -7,9 +7,9 @@
             
             <div {% cycle 'class="movie-beta__item"' 'class="movie-beta__item second-item"' 'class="movie-beta__item third-item"' 'class="movie-beta__item hidden-xs"' 'class="movie-beta__item hidden-xs hidden-sm"' 'class="movie-beta__item hidden-xs hidden-sm"' %}>
                 <img alt='' src="{{ MEDIA_URL }}{{movie.image_thumbnail}}">
-                <span class="best-rate">5.0</span>
+                <span class="best-rate">{{ movie.get_avg_rating|floatformat }}</span>
                 <ul class="movie-beta__info">
-                    <li><span class="best-voted">71 people voted today</span></li>
+                    <li><span class="best-voted">{{ movie.get_rating_votes }} people voted</span></li>
                     <li>
                         <p class="movie__time">{{ movie.duration }} min</p>    <p>                    
                         {% for category in movie.categories.all %}

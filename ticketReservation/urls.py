@@ -24,11 +24,9 @@ from .views import IndexView, AboutUsView, ContactView  # , AccountsProfileView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', IndexView.as_view(), name='index'),
+
     url(r'^rating/', include('rating.urls')),
-
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/', include('accounts.urls')),
-
     url(r'^cinema/', include('booking.urls')),
 
     url(r'^about/$', AboutUsView.as_view(), name='about'),

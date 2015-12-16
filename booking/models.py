@@ -20,7 +20,11 @@ class Category(models.Model):
 class MovieManager(models.Manager):
     """Adds custom methods to Show model."""
     def top_rated(self):
-        return self.annotate(score=Avg('rated_movie__rating')).order_by('-score')
+        try:
+            return self.annotate(score=Avg(
+                'rated_movie__rating')).order_by('-score')
+        except Exception:
+            return self
 
     def most_rated(self):
         return self.annotate(score=Avg('rated_movie')).order_by('-score')

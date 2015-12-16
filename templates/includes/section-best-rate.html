@@ -2,7 +2,6 @@
 <div class="movie-best">
     <div class="col-sm-10 col-sm-offset-1 movie-best__rating">Today Best choice</div>
     <div class="col-sm-12 change--col">
-        
         {% for movie in movies %} 
             
             <div {% cycle 'class="movie-beta__item"' 'class="movie-beta__item second-item"' 'class="movie-beta__item third-item"' 'class="movie-beta__item hidden-xs"' 'class="movie-beta__item hidden-xs hidden-sm"' 'class="movie-beta__item hidden-xs hidden-sm"' %}>

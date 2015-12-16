@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load jsonify %}
+
+
 {% block title %} Welcome to {{ site.name }} | {{ site.name }} {% endblock %}
 
 
@@ -8,7 +11,6 @@
 <section class="container">
     {% include "includes/section-best-rate.html" %}
     {% include "includes/now-in-cinema.html" %}
-    
 </section>
 {% endblock %}
 
@@ -43,37 +45,39 @@
 <!-- Custom -->
 <script src="{% static "js/custom.js" %}"></script>
 
-
-
+<!-- Rating for index -->
 <script type="text/javascript">
-        $(document).ready(function() {
-            init_Home();
-            $.fn.raty.defaults.path = "{{ STATIC_URL }}images/rate";
-            $.fn.raty.defaults.size = 24;
-            
-            $.fn.raty.defaults.starOn = "star-on.png";
-            $.fn.raty.defaults.starHalf = "star-half.png";
-            $.fn.raty.defaults.half = true;
-            $.fn.raty.defaults.single = false;
-            
-            $('.score').raty({
-                half: false,
-                score: function() {
-                    return $(this).attr('data-score');
-                },
-                click: function(score, evt) {
-                    var current_rating = 0;
-                    if (score != null) {
-                        current_rating = score;
-                    }
-                    movieId = $(this).attr('movieId');
-                    $.ajax({
-                        url: "{% url 'rating' %}",
-                        type: "POST",
-                        data: { 'rating': current_rating, 'movieId': movieId, 
-                                'csrfmiddlewaretoken': '{{ csrf_token }}'},
-                        statusCode: {
-                            403: function(jqXHR, textStatus, errorThrown) {
+    $(document).ready(function() {
+        init_Home();
+        $.fn.raty.defaults.path = "{{ STATIC_URL }}images/rate";
+        $.fn.raty.defaults.size = 24;
+
+        $.fn.raty.defaults.starOn = "star-on.png";
+        $.fn.raty.defaults.starHalf = "star-half.png";
+        $.fn.raty.defaults.half = true;
+        $.fn.raty.defaults.single = false;
+
+        readOnly = $.isEmptyObject({{ votes|jsonify }}) ? false: true;
+
+        $('.score').raty({
+            half: false,
+            readOnly: readOnly,
+            score: function() {
+                return $(this).attr('data-score');
+            },
+            click: function(score, evt) {
+                var current_rating = 0;
+                if (score != null) {
+                    current_rating = score;
+                }
+                movieId = $(this).attr('movieId');
+                $.ajax({
+                    url: "{% url 'rating' %}",
+                    type: "POST",
+                    data: { 'rating': current_rating, 'movieId': movieId, 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    statusCode: {
+                        403: function(jqXHR, textStatus, errorThrown) {
                                 // invalid rating was posted
                                 console.log(errorThrown);
                             },
@@ -84,10 +88,29 @@
                             }
                         }
                     });
-                },
-                cancel: false
-            });
+            },
+            cancel: false
         });
-    </script>
+            //if user authenticated remove rating option for rated movies
+            var userVotes = {{ userVotes|jsonify }};
+            if(userVotes){
+                $.each( userVotes, function( key, value ) {
+                    $('.score#movieId'+value.fields.movie)
+                    .raty('set', {readOnly: true, score: value.fields.rating });
+                });
+
+            }else{
+                var votes = {{ votes|jsonify }};
+                if(votes){
+                    $.each( votes, function( key, value ) {
+                        var movieId = value.fields.movie;
+                        var avg = $('.movieScoreId'+movieId).text();
+                        $('.score#movieId'+movieId).raty('set', {readOnly: true, score: avg, half: true });
+
+                    });
+                }
+            }
+        });  
+</script>
 
 {% endblock%}

@@ -12,9 +12,13 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['movies'] = get_list_or_404(Movie.objects.top_rated())
+
         if self.request.user.is_authenticated():
-            context['votes'] = get_list_or_404(Rating.objects.all().filter(
-                user=self.request.user))
+            votes = Rating.objects.all().filter(
+                user=self.request.user)
+            context['userVotes'] = votes
+        else:
+            context['votes'] = Rating.objects.all()
         context['site'] = Site.objects.get_current()
         return context
 

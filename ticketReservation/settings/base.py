@@ -46,6 +46,7 @@ PROJECT_APPS = [
     'accounts',
     'widget_tweaks',
     'rating',
+    'jsonify'
 
 ]
 

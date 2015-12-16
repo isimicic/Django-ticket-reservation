@@ -350,7 +350,7 @@ function init_Home() {
                     });
 
                     $('body').click( function (e){
-                      console.log(e.target);
+                      //console.log(e.target);
                     })
 
     //4. Rating scrore init

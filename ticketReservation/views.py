@@ -3,6 +3,7 @@ from django.shortcuts import get_list_or_404
 from django.views.generic import TemplateView
 from django.contrib.sites.models import Site
 from booking.models import Movie
+from rating.models import Rating
 
 
 class IndexView(TemplateView):
@@ -11,6 +12,9 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['movies'] = get_list_or_404(Movie.objects.top_rated())
+        if self.request.user.is_authenticated():
+            context['votes'] = get_list_or_404(Rating.objects.all().filter(
+                user=self.request.user))
         context['site'] = Site.objects.get_current()
         return context
 

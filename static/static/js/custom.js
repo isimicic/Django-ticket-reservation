@@ -1108,7 +1108,17 @@ function init_MovieList () {
 
 function init_MoviePage () {
     "use strict";
+//2. Dropdown for authorize button
+            //user list option
+            $('.auth__show').click(function (e){
+                e.preventDefault();
+                $('.auth__function').toggleClass('open-function')
+            })
 
+            $('.btn--singin').click(function (e){
+                e.preventDefault();
+                $('.auth__function').toggleClass('open-function')
+            });
 	//1. Rating scrore init
     //Rating star
     /*$('.score').raty({

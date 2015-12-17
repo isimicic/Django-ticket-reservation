@@ -15,10 +15,40 @@
 
     <div class="field-wrap">
         {% load widget_tweaks %}
-        {{ form.username|attr:"class:login__input"|attr:"placeholder:Username" }}
-        {{ form.email|attr:"class:login__input"|attr:"placeholder:Email" }}
-        {{ form.password1|add_class:"login__input"|attr:"placeholder:Password" }}
-        {{ form.password2|add_class:"login__input"|attr:"placeholder:Repeat password" }}
+        {% with WIDGET_ERROR_CLASS='invalid_field' %}
+        {% render_field form.username|attr:"class:login__input"|attr:"placeholder:Username" %}
+        {% if form.username.errors %}
+             <p class="inv-em alert alert-danger">
+                <span class="icon-warning"></span>
+                    {{form.username.errors.0}}
+                <a class="close" data-dismiss="alert" href="#" aria-hidden="true"></a>
+            </p>
+        {% endif %}
+        {% render_field form.email|attr:"class:login__input"|attr:"placeholder:Email" %}
+        {% if form.email.errors %}
+             <p class="inv-em alert alert-danger">
+                <span class="icon-warning"></span>
+                    {{form.email.errors}}
+                <a class="close" data-dismiss="alert" href="#" aria-hidden="true"></a>
+            </p>
+        {% endif %}
+        {% render_field form.password1|add_class:"login__input"|attr:"placeholder:Password" %}
+        {% if form.password1.errors %}
+             <p class="inv-em alert alert-danger">
+                <span class="icon-warning"></span>
+                    {{form.password1.errors.0}}
+                <a class="close" data-dismiss="alert" href="#" aria-hidden="true"></a>
+            </p>
+        {% endif %}
+        {% render_field form.password2|add_class:"login__input"|attr:"placeholder:Repeat password" %}
+        {% if form.password2.errors %}
+             <p class="inv-em alert alert-danger">
+                <span class="icon-warning"></span>
+                    {{form.password2.errors.0}}
+                <a class="close" data-dismiss="alert" href="#" aria-hidden="true"></a>
+            </p>
+        {% endif %}
+        {% endwith %}
         <p></p>
     </div>
     

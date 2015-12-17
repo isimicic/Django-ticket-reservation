@@ -20,17 +20,44 @@
         <div class="contact-form-wrapper">
             <div class="container">
                 <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-                    <form id='contact-form' class="form row" method='post' novalidate="" action="{% url 'contact' %}">{% csrf_token %}
+                    <form id='contact-form' class="form row" method='post' action="">{% csrf_token %}
                         {% load widget_tweaks %}
                         <p class="form__title">Drop us a line</p>
                         <div class="col-sm-6">
-                            {{ form.name|add_class:"form__name"|attr:"placeholder:Your name" }}
+                            {% with WIDGET_ERROR_CLASS='invalid_field' %}
+                                {% render_field form.name|add_class:"form__name"|attr:"placeholder:Your name" %}
+                            {% endwith %}
+                            {% if form.name.errors %}
+                                <p class="inv-em alert alert-danger">
+                                    <span class="icon-warning"></span>
+                                    {{ form.name.errors.0 }}
+                                    <a class="close" data-dismiss="alert" href="#" aria-hidden="true"></a>
+                                </p>
+                            {% endif %}
                         </div>
                         <div class="col-sm-6">
-                            {{ form.email|add_class:"form__mail"|attr:"placeholder:Your email" }}
+                            {% with WIDGET_ERROR_CLASS='invalid_field' %}
+                                {% render_field form.email|add_class:"form__mail"|attr:"placeholder:Your email" %}
+                            {% endwith %}
+                            {% if form.email.errors %}
+                                <p class="inv-em alert alert-danger">
+                                    <span class="icon-warning"></span>
+                                    {{ form.email.errors.0 }}
+                                    <a class="close" data-dismiss="alert" href="#" aria-hidden="true"></a>
+                                </p>
+                            {% endif %}
                         </div>
                         <div class="col-sm-12">
-                            {{ form.message|add_class:"form__message"|attr:"placeholder:Your message" }}
+                            {% with WIDGET_ERROR_CLASS='invalid_field' %}
+                                {% render_field form.message|add_class:"form__message"|attr:"placeholder:Your message" %}
+                            {% endwith %}
+                            {% if form.message.errors %}
+                                <p class="inv-em alert alert-danger">
+                                    <span class="icon-warning"></span>
+                                    {{ form.message.errors.0 }}
+                                    <a class="close" data-dismiss="alert" href="#" aria-hidden="true"></a>
+                                </p>
+                            {% endif %}
                         </div>
                         <button type="submit" class='btn btn-md btn--danger'>send message</button>
                     </form>

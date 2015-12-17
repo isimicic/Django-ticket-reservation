@@ -27,7 +27,7 @@ if(!Modernizr.input.placeholder){             //placeholder for old brousers and
    })
   });
  }
-  
+ /* 
 $('#contact-form').submit(function(e) {
       
         var error = 0;
@@ -106,7 +106,7 @@ $('.login').submit(function(e) {
 		// var formInput = self.serialize();
 		// $.post(self.attr('action'),formInput, function(data){}); // end post
 }); // end submit
-		
+*/
 		
 
 function createErrTult(text, $elem){

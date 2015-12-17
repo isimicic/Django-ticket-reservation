@@ -13,7 +13,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['movies'] = get_list_or_404(Movie.objects.top_rated())
-
+        context['top'] = get_list_or_404(Movie.objects.most_rated())
         if self.request.user.is_authenticated():
             votes = Rating.objects.all().filter(
                 user=self.request.user)

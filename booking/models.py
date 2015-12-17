@@ -4,6 +4,7 @@ from imagekit.processors import ResizeToFill
 from django.contrib.auth.models import User
 import os
 from django.db.models import Avg
+import datetime
 
 
 def get_image_path(instance, filename):
@@ -57,9 +58,9 @@ class Movie(models.Model):
         else:
             return 0.00
 
-    def get_rating_votes(self):
-        """Returns all rating votes for a show."""
-        return self.rated_movie.all().count()
+    def get_rating_votes_today(self):
+        return self.rated_movie.all().filter(
+            date_rated__date=datetime.datetime.now().date()).count()
 
     def __unicode__(self):
         return u"Name: {0}, Director: {1}".format(self.title, self.director)

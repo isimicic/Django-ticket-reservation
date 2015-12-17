@@ -70,11 +70,11 @@
                     'csrfmiddlewaretoken': '{{ csrf_token }}'},
                     statusCode: {
                         403: function(jqXHR, textStatus, errorThrown) {
-                                // invalid rating was posted
-                                console.log(errorThrown);
-                            },
-                            200: function(data, textStatus, jqXHR) {
-                                obj = $.parseJSON(data);
+                            // invalid rating was posted
+                            console.log(errorThrown);
+                        },
+                        200: function(data, textStatus, jqXHR) {
+                            obj = $.parseJSON(data);
                                 $('.movieScoreId'+obj.movieId.toString()).text(obj.avg.toFixed(1));
                                 $('.score#movieId'+obj.movieId).raty('set', {readOnly: true, score: obj.rating });
                             }

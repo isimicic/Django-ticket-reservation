@@ -12,7 +12,10 @@ class MovieView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(MovieView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated():
-            context['vote'] = Rating.objects.get(user=self.request.user,
-                                                 movie=context['object'])
+            try:
+                context['vote'] = Rating.objects.get(user=self.request.user,
+                                                     movie=self.get_object())
+            except Rating.DoesNotExist:
+                pass
         context['site'] = Site.objects.get_current()
         return context

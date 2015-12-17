@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load jsonify %}
+
 {% block title %} Movie {{ object.title }} | {{ site.name }} {% endblock %}
 
 
@@ -16,7 +18,10 @@
                         <span class="movie__rating">{{ object.get_avg_rating|floatformat }}</span>
                         <img alt='' src="{{MEDIA_URL}}{{object.image_thumbnail}}">
                     </div>
-                    <div class="movie__rate">Your vote: <div id='score' class="score"></div>
+                        
+                    <div class="movie__rate">
+                        {{ user.is_authenticated|yesno:"Your vote:,Vote" }}         
+                        <div id='score' class="score" movieId="{{ object.id }}"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-8">
@@ -215,16 +220,50 @@
         $.fn.raty.defaults.starHalf = "star-half.png";
         $.fn.raty.defaults.half = true;
         $.fn.raty.defaults.single = false;
-            
+        
+        readOnly = {{user.is_authenticated|yesno:"true,false"}} ? false: true; 
         $('.score').raty({
             half: false,
+            readOnly: readOnly,
             score: function() {
                 return $(this).attr('data-score');
             },
+            click: function(score, evt) {
+                var current_rating = 0;
+                if (score != null) {
+                    current_rating = score;
+                }
+                movieId = $(this).attr('movieId');
+                $.ajax({
+                    url: "{% url 'rating' %}",
+                    type: "POST",
+                    data: { 'rating': current_rating, 'movieId': movieId, 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    statusCode: {
+                        403: function(jqXHR, textStatus, errorThrown) {
+                            // invalid rating was posted
+                            console.log(errorThrown);
+                        },
+                        200: function(data, textStatus, jqXHR) {
+                            obj = $.parseJSON(data);
+                            $('.movie__rating').text(obj.avg.toFixed(1));
+                            $('.score').raty('set', {readOnly: true, score: obj.rating });
+                        }
+                    }
+                });
+            },
             cancel: false,
-            readOnly: true,
-            score: "{{vote.rating}}"
         });
+        if(readOnly)
+        {
+            //user not authenticated
+            var avg = $('.movie__rating').text();
+            $('.score').raty('set', {readOnly: true, score: avg, half: true });
+        }else{
+            //user authenticated
+            if({{vote.rating|yesno:"true,false"}})
+                $('.score').raty('set', {readOnly: true, score: '{{vote.rating}}'});
+        }
     });
 </script>
 {% endblock%}

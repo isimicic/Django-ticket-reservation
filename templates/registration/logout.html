@@ -6,11 +6,14 @@
 <div id="login-form" class="log">
     <p class="login__title">Successfully logged out.</p>
 </div>
+{% endblock %}
+
+{% block scripts %}
+    
 <script>
-
-setTimeout(function(){
-   window.location.href = "/";
-}, 3000);
-
+    setTimeout(function(){
+       window.location.href = "/";
+    }, 1500);
 </script>
+
 {% endblock %}

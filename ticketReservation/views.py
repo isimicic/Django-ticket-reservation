@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from .forms import ContactForm
+from django.views.generic.edit import FormView
 from django.shortcuts import get_list_or_404
 from django.views.generic import TemplateView
 from django.contrib.sites.models import Site
@@ -26,14 +27,22 @@ class IndexView(TemplateView):
 class AboutUsView(TemplateView):
     template_name = "staticSites/aboutUs.html"
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name,
-                      {'site': Site.objects.get_current()})
+    def get_context_data(self, **kwargs):
+        context = super(AboutUsView, self).get_context_data(**kwargs)
+        context['site'] = Site.objects.get_current()
+        return context
 
 
-class ContactView(TemplateView):
+class ContactView(FormView):
     template_name = "staticSites/contact.html"
+    form_class = ContactForm
+    success_url = '/contact/success/'
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name,
-                      {'site': Site.objects.get_current()})
+    def get_context_data(self, **kwargs):
+        context = super(ContactView, self).get_context_data(**kwargs)
+        context['site'] = Site.objects.get_current()
+        return context
+
+    def form_valid(self, form):
+        form.send_email()
+        return super(ContactView, self).form_valid(form)

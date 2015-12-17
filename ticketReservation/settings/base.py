@@ -160,4 +160,4 @@ EMAIL_USE_TLS = False
 # Site properties
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = "/accounts/"
+LOGIN_REDIRECT_URL = "/accounts/profile/"

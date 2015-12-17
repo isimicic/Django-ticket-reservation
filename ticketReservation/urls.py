@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic.base import TemplateView
 # Our views
 from .views import IndexView, AboutUsView, ContactView  # , AccountsProfileView
 
@@ -31,6 +32,9 @@ urlpatterns = [
 
     url(r'^about/$', AboutUsView.as_view(), name='about'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
+    url(r'^contact/success/$',
+        TemplateView.as_view(template_name='staticSites/contactSuccess.html'),
+        name="contact_success"),
 
 ]
 

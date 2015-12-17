@@ -20,3 +20,6 @@ class Rating(models.Model):
     def __unicode__(self):
         return u"{0} rated {1} {2}".format(self.user, self.movie,
                                            self.get_rating_display())
+
+    # class Meta:
+    #   unique_together = ("movie", "user"),

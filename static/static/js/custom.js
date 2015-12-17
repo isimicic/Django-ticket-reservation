@@ -196,17 +196,7 @@ function init_Elements () {
                 }
             });
 
-    //7. Dropdown for authorize button
-    		//user list option
-            $('.auth__show').click(function (e){
-                e.preventDefault();
-                $('.auth__function').toggleClass('open-function')
-            })
-
-            $('.btn--singin').click(function (e){
-                e.preventDefault();
-                $('.auth__function').toggleClass('open-function')
-            });
+  
 
 }
 
@@ -275,17 +265,7 @@ function init_Home() {
                     });
 
 	
-	//2. Dropdown for authorize button
-    		//user list option
-            $('.auth__show').click(function (e){
-                e.preventDefault();
-                $('.auth__function').toggleClass('open-function')
-            })
 
-            $('.btn--singin').click(function (e){
-                e.preventDefault();
-                $('.auth__function').toggleClass('open-function')
-            });
 
     //3. Mega select with filters (and markers)
     //Mega select interaction
@@ -889,7 +869,7 @@ function init_Contact () {
 				//Init map
                     var mapOptions = {
                         scaleControl: true,
-                        center: new google.maps.LatLng(51.509708, -0.130539),
+                        center: new google.maps.LatLng(45.778239, 15.981631),
                         zoom: 15,
                         navigationControl: false,
                         streetViewControl: false,
@@ -920,7 +900,7 @@ function init_Contact () {
 
                     //Creates the information to go in the pop-up info box.
                     var boxTextA = document.createElement("div");
-                    boxTextA.innerHTML = '<span class="pop_up_box_text">Leicester Sq, London, WC2H 7LP</span>';
+                    boxTextA.innerHTML = '<span class="pop_up_box_text">Zagreb, abcd abcd </span>';
 
                     //Sets up the configuration options of the pop-up info box.
                     var infoboxOptionsA = {
@@ -939,7 +919,7 @@ function init_Contact () {
                      }
                      ,closeBoxMargin: "6px 2px 2px 2px"
                      ,infoBoxClearance: new google.maps.Size(1, 1)
-                     ,closeBoxURL: "images/components/close.svg"
+                     ,closeBoxURL: "/static/images/components/close.svg"
                      ,isHidden: false
                      ,pane: "floatPane"
                      ,enableEventPropagation: false
@@ -1109,16 +1089,8 @@ function init_MovieList () {
 function init_MoviePage () {
     "use strict";
 //2. Dropdown for authorize button
-            //user list option
-            $('.auth__show').click(function (e){
-                e.preventDefault();
-                $('.auth__function').toggleClass('open-function')
-            })
 
-            $('.btn--singin').click(function (e){
-                e.preventDefault();
-                $('.auth__function').toggleClass('open-function')
-            });
+
 	//1. Rating scrore init
     //Rating star
     /*$('.score').raty({

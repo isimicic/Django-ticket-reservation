@@ -77,8 +77,27 @@
     {% endblock %}
     {% include "includes/open-close.html"%}
     
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/external/jquery-1.10.1.min.js"><\/script>')</script>
+    <!-- Migrate --> 
+    <script src="{% static "js/external/jquery-migrate-1.2.1.min.js" %}"></script>
+    <!-- Bootstrap 3--> 
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     {% block scripts %}
     
     {% endblock %}
+    <script>
+    $(document).ready(function() {
+            $('.auth__show').click(function (e){
+                    e.preventDefault();
+                    $('.auth__function').toggleClass('open-function')
+                })
+
+                $('.btn--singin').click(function (e){
+                    e.preventDefault();
+                    $('.auth__function').toggleClass('open-function')
+                });});
+    </script>
 </body>
 </html>

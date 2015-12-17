@@ -22,6 +22,7 @@ class ProfileIndexView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileIndexView, self).get_context_data(**kwargs)
+        context['site'] = Site.objects.get_current()
         return context
 
     def get_queryset(self):

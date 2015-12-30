@@ -84,3 +84,8 @@ class SeatAdmin(admin.ModelAdmin):
 
     def get_auditorium_name(self, obj):
         return obj.auditorium.name
+
+
+@admin.register(Screening)
+class ScreeningAdmin(admin.ModelAdmin):
+    list_display = ('screening_start', 'screening_end', 'movie', 'auditorium')

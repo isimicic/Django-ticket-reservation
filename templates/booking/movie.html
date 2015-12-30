@@ -7,12 +7,12 @@
 
 {% block content %}
 <!-- Search bar -->
-{% include "includes/movie-search.html"%}  
+{# {% include "includes/movie-search.html" %} #}
 <section class="container">
     <div class="col-sm-8 col-md-9">
         <div class="movie">
             <h2 class="page-heading">{{ object.title }}</h2>
-            <div class="movie__info">
+            <div class="movie__info" movieId='{{ object.id }}'>
                 <div class="col-sm-6 col-md-4 movie-mobile">
                     <div class="movie__images">
                         <span class="movie__rating">{{ object.get_avg_rating|floatformat }}</span>
@@ -20,7 +20,7 @@
                     </div>
                         
                     <div class="movie__rate">
-                        {{ user.is_authenticated|yesno:"Your vote:,Vote" }}         
+                        {{ user.is_authenticated|yesno:"Your vote:,Vote" }}
                         <div id='score' class="score" movieId="{{ object.id }}"></div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <p class="movie__option"><strong>Country: </strong><a href="#">{{ object.city }}</a>, <a href="#">{{ object.country }}</a></p>
                     <p class="movie__option"><strong>Year: </strong><a href="#">{{ object.release_date|date:"Y" }}</a></p>
                     <p class="movie__option"><strong>Category: </strong>
-                    {% for category in movie.categories.all %}
+                    {% for category in object.categories.all %}
                         <a href="#">{{ category.name }}</a>
                         {% if not forloop.last %}
                             ,                       
@@ -42,11 +42,13 @@
                         {{ object.cast }}...
                     </p>
                     {% if object.age_restriction%}
-                        <p class="movie__option"><strong>Age restriction: </strong><a href="#">{{ object.age_restriction }}</a></p>
+                        <p class="movie__option"><strong>Age restriction: </strong>
+                            <a href="#">{{ object.age_restriction }}</a>
+                        </p>
                     {% endif %}
 
                     <div class="movie__btns">
-                        <a href="#" class="btn btn-md btn--warning">book a ticket for this movie</a>
+                        <a id="reserve" class="btn btn-md btn--warning">book a ticket for this movie</a>
                         <!--<a href="#" class="watchlist">Add to watchlist</a>-->
                     </div>
 
@@ -74,20 +76,15 @@
         <div class="choose-container">
             <form id='select' class="select" method='get'>
                 <select name="select_item" id="select-sort" class="select__sort" tabindex="0">
-                    <option value="1" selected='selected'>London</option>
-                    <option value="2">New York</option>
-                    <option value="3">Paris</option>
-                    <option value="4">Berlin</option>
-                    <option value="5">Moscow</option>
-                    <option value="3">Minsk</option>
-                    <option value="4">Warsawa</option>
-                    <option value="5">Kiev</option>
+                    {% for city in cities %}
+                        <option value="{{city.id}}" {%if forloop.couter == 1 %}selected='selected'{% endif %}>{{ city.name }}</option>
+                    {% endfor %}
                 </select>
             </form>
 
             <div class="datepicker">
                 <span class="datepicker__marker"><i class="fa fa-calendar"></i>Date</span>
-                <input type="text" id="datepicker" value='03/10/2014' class="datepicker__input">
+                <input type="text" id="datepicker" value='{% now "m/d/Y" %}' class="datepicker__input">
             </div>
 
             <a href="#" id="map-switch" class="watchlist watchlist--map"><span class="show-map">Show cinemas on map</span><span  class="show-time">Show cinema time table</span></a>
@@ -95,82 +92,38 @@
             <div class="clearfix"></div>
 
             <div class="time-select">
-                <div class="time-select__group group--first">
-                    <div class="col-sm-4">
-                        <p class="time-select__place">Cineworld</p>
-                    </div>
-                    <ul class="col-sm-8 items-wrap">
-                        <li class="time-select__item" data-time='09:40'>09:40</li>
-                        <li class="time-select__item" data-time='13:45'>13:45</li>
-                        <li class="time-select__item active" data-time='15:45'>15:45</li>
-                        <li class="time-select__item" data-time='19:50'>19:50</li>
-                        <li class="time-select__item" data-time='21:50'>21:50</li>
-                    </ul>
-                </div>
+                {% for obj in screenings %}
+                    {% ifchanged  obj.auditorium.cinema.name %}
+                        {% if not forloop.first %}
+                            </ul>
+                            </div>
+                        {% endif %}
+                        <div class="time-select__group {% if forloop.first %}group--first{% endif %} {% if forloop.last %}group--last{% endif %}">
+                            <div class="col-sm-4">
+                                <p class="time-select__place">{{ obj.auditorium.cinema.name }}</p>
+                            </div>
 
-                <div class="time-select__group">
-                <div class="col-sm-4">
-                    <p class="time-select__place">Empire</p>
-                </div>
-                <ul class="col-sm-8 items-wrap">
-                    <li class="time-select__item" data-time='10:45'>10:45</li>
-                    <li class="time-select__item" data-time='16:00'>16:00</li>
-                    <li class="time-select__item" data-time='19:00'>19:00</li>
-                    <li class="time-select__item" data-time='21:15'>21:15</li>
-                    <li class="time-select__item" data-time='23:00'>23:00</li>
-                </ul>
+                            <ul class="col-sm-8 items-wrap">
+                                <li class="time-select__item" data-time='{{obj.screening_start|date:'H:i'}}' screeningId='{{ obj.id }}'>{{obj.screening_start|date:'H:i'}}</li>
+                    {% else %}
+                                <li class="time-select__item" data-time='{{obj.screening_start|date:'H:i'}}' screeningId='{{ obj.id }}'>{{obj.screening_start|date:'H:i'}}</li>
+                    {% endifchanged %}
+                    {% if forloop.last %}
+                        </ul>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <div class="time-select__group">Sorry, no shows.</div>
+                {% endfor %}
             </div>
-
-            <div class="time-select__group">
-                <div class="col-sm-4">
-                    <p class="time-select__place">Curzon</p>
-                </div>
-                <ul class="col-sm-8 items-wrap">
-                    <li class="time-select__item" data-time='09:00'>09:00</li>
-                    <li class="time-select__item" data-time='11:00'>11:00</li>
-                    <li class="time-select__item" data-time='13:00'>13:00</li>
-                    <li class="time-select__item" data-time='15:00'>15:00</li>
-                    <li class="time-select__item" data-time='17:00'>17:00</li>
-                    <li class="time-select__item" data-time='19:0'>19:00</li>
-                    <li class="time-select__item" data-time='21:0'>21:00</li>
-                    <li class="time-select__item" data-time='23:0'>23:00</li>
-                    <li class="time-select__item" data-time='01:0'>01:00</li>
-                </ul>
+            <!-- hiden maps with multiple locator-->
+            <div  class="map">
+                <div id='cimenas-map'></div> 
             </div>
-
-            <div class="time-select__group">
-                <div class="col-sm-4">
-                    <p class="time-select__place">Odeon</p>
-                </div>
-                <ul class="col-sm-8 items-wrap">
-                    <li class="time-select__item" data-time='10:45'>10:45</li>
-                    <li class="time-select__item" data-time='16:00'>16:00</li>
-                    <li class="time-select__item" data-time='19:00'>19:00</li>
-                    <li class="time-select__item" data-time='21:15'>21:15</li>
-                    <li class="time-select__item" data-time='23:00'>23:00</li>
-                </ul>
-            </div>
-
-            <div class="time-select__group group--last">
-                <div class="col-sm-4">
-                    <p class="time-select__place">Picturehouse</p>
-                </div>
-                <ul class="col-sm-8 items-wrap">
-                    <li class="time-select__item" data-time='17:45'>17:45</li>
-                    <li class="time-select__item" data-time='21:30'>21:30</li>
-                    <li class="time-select__item" data-time='02:20'>02:20</li>
-                </ul>
-            </div>
-        </div>
-        <!-- hiden maps with multiple locator-->
-        <div  class="map">
-            <div id='cimenas-map'></div> 
         </div>
     </div>
-</div>
 
 {# {% include "includes/movie-aside-banner.html"%} #}
-
 </section>
 
 {% endblock %}
@@ -221,7 +174,9 @@
         $.fn.raty.defaults.half = true;
         $.fn.raty.defaults.single = false;
         
-        readOnly = {{user.is_authenticated|yesno:"true,false"}} ? false: true; 
+        var readOnly = {{user.is_authenticated|yesno:"true,false"}} ? false: true;
+        var movieId = $('.score').attr('movieId');
+
         $('.score').raty({
             half: false,
             readOnly: readOnly,
@@ -233,7 +188,6 @@
                 if (score != null) {
                     current_rating = score;
                 }
-                movieId = $(this).attr('movieId');
                 $.ajax({
                     url: "{% url 'rating' %}",
                     type: "POST",
@@ -261,9 +215,105 @@
             $('.score').raty('set', {readOnly: true, score: avg, half: true });
         }else{
             //user authenticated
-            if({{vote.rating|yesno:"true,false"}})
+            if({{ vote.rating|yesno:"true,false" }})
                 $('.score').raty('set', {readOnly: true, score: '{{vote.rating}}'});
         }
+
+        $("#select-sort").selectbox({
+            onChange: function (val, inst) {
+                $(inst.input[0]).children().each(function(item){
+                    $(this).removeAttr('selected');
+                })
+                $(inst.input[0]).find('[value="'+val+'"]').attr('selected','selected');
+
+                $.ajax({
+                    url: '{% url 'movie' 0 %}'.replace('0', movieId),
+                    type: "POST",
+                    data: { 'cityId': val, 'movieId': movieId, 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    statusCode: {
+                        403: function(jqXHR, textStatus, errorThrown) {
+                            // invalid rating was posted
+                            console.log(errorThrown);
+                        },
+                        200: function(data, textStatus, jqXHR) {
+                            if(data.data.length == 0) {
+                                $('.time-select').html("Sorry, no shows.")
+                            }else{
+                                $('.time-select').html('');
+                                var oldName;
+                                var elem;
+                                var place;
+                                var time;
+                                $.each( data.data, function( index, value ) {
+                                    var date;
+                                    var cinemaName;
+                                    var screeningId;
+                                    $.each( value, function( key, value ) {
+                                        //console.log(value + " ");
+                                        if(key == "start"){
+                                            date = new Date(value);
+                                            hours = date.getHours();
+                                            min = (date.getMinutes()<10?'0':'') + date.getMinutes();
+                                            //console.log(hours + ":" + min);
+                                        }else if(key == "cinemaName"){
+                                            cinemaName = value;
+                                        }else if(key == "screeningId"){
+                                            screeningId = value;
+                                        }
+                                    });    
+                                    
+                                    if(oldName != cinemaName){
+                                        elem = document.createElement('div');
+                                    
+                                        if(index == 0){
+                                            elem.className = 'time-select__group group--first';
+                                        }else if(index == data.data.length - 1){
+                                            elem.className = 'time-select__group group--last';
+                                        }else{
+                                            elem.className = 'time-select__group';
+                                        }
+                                        place = document.createElement('div');
+                                            place.className = 'col-sm-4';
+                                            place.innerHTML = "<p class='time-select__place'>"+ cinemaName +"</p>";
+                                        time = document.createElement('ul');
+                                            time.className = 'col-sm-8 items-wrap';
+                                        var li=document.createElement('li');
+                                            li.className = 'time-select__item';
+                                            li.setAttribute('date-time', hours + ":" + min);
+                                            li.setAttribute('screeningId', screeningId);
+                                            li.innerHTML = hours + ":" + min;
+                                        time.appendChild(li);
+                                        elem.appendChild(place);
+                                        elem.appendChild(time);
+
+                                    }else{
+                                        var li=document.createElement('li');
+                                            li.className = 'time-select__item';
+                                            li.setAttribute('date-time', hours + ":" + min);
+                                            li.setAttribute('screeningId', screeningId);
+                                            li.innerHTML = hours + ":" + min;
+                                        time.appendChild(li);
+                                    }
+           
+                                    oldName = cinemaName;
+                                    $('.time-select').append(elem);
+                                });
+                                
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        jQuery('#reserve').click(function(){
+            var screening = document.getElementsByClassName("time-select__item active");
+            console.log(screening);
+            if(screening.length > 0){
+                var id = screening[0].getAttribute("screeningId");
+                $(location).attr('href',"/cinema/reserve/"+id+"/");
+            }
+        });
     });
 </script>
 {% endblock%}

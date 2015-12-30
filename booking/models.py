@@ -19,7 +19,9 @@ class Category(models.Model):
 
 
 class MovieManager(models.Manager):
+
     """Adds custom methods to Show model."""
+
     def top_rated(self):
         try:
             return self.annotate(score=Avg(
@@ -91,7 +93,7 @@ class Auditorium(models.Model):
     cinema = models.ForeignKey(Cinema)
 
     def __unicode__(self):
-        return u"{0} {1}".format(self.name, self.seats_number)
+        return u"{0}, {1}".format(self.cinema.name, self.name)
 
 
 class Seat(models.Model):
@@ -111,7 +113,41 @@ class ReservationType(models.Model):
         return u"{0}".format(self.type)
 
 
+class ScreeningManager(models.Manager):
+    # queryset = Screening.objects.filter(
+    #    auditorium__cinema__city__id=request.POST['cityId'])
+
+    def getScreenings(self, cityId, movieId):
+        import time
+        from django.utils import timezone
+        data = []
+        movie = Movie.objects.get(pk=movieId)
+        print movie
+        queryset = self.all().filter(
+            movie=movie,
+            auditorium__cinema__city__id=cityId
+        ).order_by('auditorium__cinema__name')
+        for screening in queryset.filter(
+                screening_start__gte=timezone.localtime(timezone.now())):
+
+            start = screening.screening_start
+            end = screening.screening_end
+
+            data.append({
+                'screeningId': screening.id,
+                'cinemaId': screening.auditorium.cinema.id,
+                'cinemaName': screening.auditorium.cinema.name,
+                'auditoriumId': screening.auditorium.id,
+                'start': int(
+                    time.mktime(start.timetuple()) * 1000),
+                'end': int(time.mktime(end.timetuple()) * 1000),
+            })
+        return {'success': 1, 'data': data}
+
+
 class Screening(models.Model):
+    objects = ScreeningManager()
+
     screening_start = models.DateTimeField()
     screening_end = models.DateTimeField()
     movie = models.ForeignKey(Movie)

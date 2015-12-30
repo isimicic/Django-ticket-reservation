@@ -46,8 +46,7 @@ PROJECT_APPS = [
     'accounts',
     'widget_tweaks',
     'rating',
-    'jsonify'
-
+    'jsonify',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS

@@ -370,7 +370,7 @@ function init_BookingOne() {
                     date = $('.choosen-date'),
                     cinema = $('.choosen-cinema'),
                     time = $('.choosen-time');
-
+/*
     //3. Swiper slider
     //init employee sliders
                 var mySwiper = new Swiper('.swiper-container',{
@@ -445,7 +445,7 @@ function init_BookingOne() {
                         mySwiper.reInit();
                     }
                  });
-	
+
 	//4. Dropdown init 
 				//select
                 $("#select-sort").selectbox({
@@ -551,7 +551,7 @@ function init_BookingOne() {
                     e.preventDefault();
                     $(this).toggleClass('hide-content');
                     $('.time-select').slideToggle(400);
-                })
+                })*/
 }
 
 function init_BookingTwo () {
@@ -1258,7 +1258,7 @@ function init_MoviePage () {
                           toggle = false;
                     });
                 });
-    */
+
     //4. Dropdown init 
 				//select
                 $("#select-sort").selectbox({
@@ -1271,13 +1271,13 @@ function init_MoviePage () {
                     }
 
                 });
-
+*/    
     
     //5. Datepicker init
                 $( ".datepicker__input" ).datepicker({
                   showOtherMonths: true,
                   selectOtherMonths: true,
-                  showAnim:"fade"
+                  showAnim:"fade",
                 });
 
                 $(document).click(function(e) { 
@@ -1310,10 +1310,16 @@ function init_MoviePage () {
                   });
 
     //7. Timetable active element
+    /*
     			$('.time-select__item').click(function (){
                     $('.time-select__item').removeClass('active');
                     $(this).addClass('active');
                 });
+                */
+    $(".time-select__item").live("click", function(){
+             $('.time-select__item').removeClass('active');
+                    $(this).addClass('active');
+        });
 
     //8. Toggle between cinemas timetable and map with location
     			//change map - ticket list

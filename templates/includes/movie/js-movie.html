@@ -1,0 +1,188 @@
+{% load staticfiles %}
+{% load jsonify %}
+<!-- jQuery UI -->
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<!-- Mobile menu -->
+<script src="{% static "js/jquery.mobile.menu.js" %}"></script>
+<!-- Select -->
+<script src="{% static "js/external/jquery.selectbox-0.2.min.js" %}"></script>
+
+<!-- Stars rate -->
+<script src="{% static "js/external/jquery.raty.js" %}"></script>
+<!-- Swiper slider -->
+<script src="{% static "js/external/idangerous.swiper.min.js" %}"></script>
+<!-- Magnific-popup -->
+<script src="{% static "js/external/jquery.magnific-popup.min.js" %}"></script> 
+
+<!--*** Google map  ***-->
+<script src="https://maps.google.com/maps/api/js"></script> 
+<!--*** Google map infobox  ***-->
+<script src="{% static "js/external/infobox.js" %}"></script> 
+
+<!-- Share buttons
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-525fd5e9061e7ef0"></script>
+-->
+<!-- Form element -->
+<script src="{% static "js/external/form-element.js" %}"></script>
+<!-- Form validation -->
+<script src="{% static "js/form.js" %}"></script>
+
+<!-- Custom -->
+<script src="{% static "js/custom.js" %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        init_MoviePage();
+
+        $.fn.raty.defaults.path = "{{ STATIC_URL }}images/rate";
+        $.fn.raty.defaults.size = 24;
+            
+        $.fn.raty.defaults.starOn = "star-on.png";
+        $.fn.raty.defaults.starHalf = "star-half.png";
+        $.fn.raty.defaults.half = true;
+        $.fn.raty.defaults.single = false;
+        
+        var readOnly = {{user.is_authenticated|yesno:"true,false"}} ? false: true;
+        var movieId = $('.score').attr('movieId');
+
+        $('.score').raty({
+            half: false,
+            readOnly: readOnly,
+            score: function() {
+                return $(this).attr('data-score');
+            },
+            click: function(score, evt) {
+                var current_rating = 0;
+                if (score != null) {
+                    current_rating = score;
+                }
+                $.ajax({
+                    url: "{% url 'rating' %}",
+                    type: "POST",
+                    data: { 'rating': current_rating, 'movieId': movieId, 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    statusCode: {
+                        403: function(jqXHR, textStatus, errorThrown) {
+                            // invalid rating was posted
+                            console.log(errorThrown);
+                        },
+                        200: function(data, textStatus, jqXHR) {
+                            obj = $.parseJSON(data);
+                            $('.movie__rating').text(obj.avg.toFixed(1));
+                            $('.score').raty('set', {readOnly: true, score: obj.rating });
+                        }
+                    }
+                });
+            },
+            cancel: false,
+        });
+        if(readOnly)
+        {
+            //user not authenticated
+            var avg = $('.movie__rating').text();
+            $('.score').raty('set', {readOnly: true, score: avg, half: true });
+        }else{
+            //user authenticated
+            if({{ vote.rating|yesno:"true,false" }})
+                $('.score').raty('set', {readOnly: true, score: '{{vote.rating}}'});
+        }
+
+        $("#select-sort").selectbox({
+            onChange: function (val, inst) {
+                $(inst.input[0]).children().each(function(item){
+                    $(this).removeAttr('selected');
+                })
+                $(inst.input[0]).find('[value="'+val+'"]').attr('selected','selected');
+
+                $.ajax({
+                    url: '{% url 'movie' 0 %}'.replace('0', movieId),
+                    type: "POST",
+                    data: { 'cityId': val, 'movieId': movieId, 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    statusCode: {
+                        403: function(jqXHR, textStatus, errorThrown) {
+                            // invalid rating was posted
+                            console.log(errorThrown);
+                        },
+                        200: function(data, textStatus, jqXHR) {
+                            if(data.data.length == 0) {
+                                $('.time-select').html("Sorry, no shows.")
+                            }else{
+                                $('.time-select').html('');
+                                var oldName;
+                                var elem;
+                                var place;
+                                var time;
+                                $.each( data.data, function( index, value ) {
+                                    var date;
+                                    var cinemaName;
+                                    var screeningId;
+                                    $.each( value, function( key, value ) {
+                                        //console.log(value + " ");
+                                        if(key == "start"){
+                                            date = new Date(value);
+                                            hours = date.getHours();
+                                            min = (date.getMinutes()<10?'0':'') + date.getMinutes();
+                                            //console.log(hours + ":" + min);
+                                        }else if(key == "cinemaName"){
+                                            cinemaName = value;
+                                        }else if(key == "screeningId"){
+                                            screeningId = value;
+                                        }
+                                    });    
+                                    
+                                    if(oldName != cinemaName){
+                                        elem = document.createElement('div');
+                                    
+                                        if(index == 0){
+                                            elem.className = 'time-select__group group--first';
+                                        }else if(index == data.data.length - 1){
+                                            elem.className = 'time-select__group group--last';
+                                        }else{
+                                            elem.className = 'time-select__group';
+                                        }
+                                        place = document.createElement('div');
+                                            place.className = 'col-sm-4';
+                                            place.innerHTML = "<p class='time-select__place'>"+ cinemaName +"</p>";
+                                        time = document.createElement('ul');
+                                            time.className = 'col-sm-8 items-wrap';
+                                        var li=document.createElement('li');
+                                            li.className = 'time-select__item';
+                                            li.setAttribute('date-time', hours + ":" + min);
+                                            li.setAttribute('screeningId', screeningId);
+                                            li.innerHTML = hours + ":" + min;
+                                        time.appendChild(li);
+                                        elem.appendChild(place);
+                                        elem.appendChild(time);
+
+                                    }else{
+                                        var li=document.createElement('li');
+                                            li.className = 'time-select__item';
+                                            li.setAttribute('date-time', hours + ":" + min);
+                                            li.setAttribute('screeningId', screeningId);
+                                            li.innerHTML = hours + ":" + min;
+                                        time.appendChild(li);
+                                    }
+           
+                                    oldName = cinemaName;
+                                    $('.time-select').append(elem);
+                                });
+                                
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        jQuery('#reserve').click(function(){
+            var screening = document.getElementsByClassName("time-select__item active");
+            console.log(screening);
+            if(screening.length > 0){
+                var id = screening[0].getAttribute("screeningId");
+                $(location).attr('href',"/cinema/reserve/"+id+"/");
+            }
+        });
+    });
+</script>

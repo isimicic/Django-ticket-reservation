@@ -663,24 +663,24 @@ function init_BookingTwo () {
 
 				//--- Step for data  ---//
 				//Get data from pvevius page
-                var url = decodeURIComponent(document.URL);
-                var prevDate = url.substr(url.indexOf('?')+1);
+                //var url = decodeURIComponent(document.URL);
+                //var prevDate = url.substr(url.indexOf('?')+1);
 
                 //Serialize, add new data and send to next page
-                $('.booking-form').submit( function (e) {
+                /*$('.booking-form').submit( function (e) {
                     e.preventDefault(); 
                     var bookData = $(this).serialize();
-
-                    var fullData = prevDate + '&' + bookData
+                    var csrftoken = $.cookie("csrftoken");
+                    //var fullData = prevDate + '&' + bookData
                     var action, 
                         control = $('.order__control-btn.active').text();
 
-                        if (control == "Purchase"){ action = 'book3-buy.html'; }
-                        else if (control == "Reserve"){ action = 'book3-reserve.html'; }
+                        if (control == "Purchase"){ action = '/'; }
+                        else if (control == "Reserve"){ action = '/cinema/reserved/'; }
 
-                    $.get( action, fullData, function(data){});
+                    $.post( action, function(csrftoken){});
                 });
-
+                */
                 $('.top-scroll').parent().find('.top-scroll').remove();
 
         //4. Choosing sits mobile

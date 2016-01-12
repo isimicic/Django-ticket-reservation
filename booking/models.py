@@ -96,16 +96,6 @@ class Auditorium(models.Model):
         return u"{0}, {1}".format(self.cinema.name, self.name)
 
 
-class Seat(models.Model):
-    row = models.CharField(max_length=2)
-    CHOICES = [(i, i + 1) for i in range(20)]
-    number = models.PositiveSmallIntegerField(choices=CHOICES)
-    auditorium = models.ForeignKey(Auditorium)
-
-    def __unicode__(self):
-        return u"{0} {1}".format(self.row, self.number)
-
-
 class ReservationType(models.Model):
     type = models.CharField(max_length=255)
 
@@ -157,10 +147,18 @@ class Screening(models.Model):
         return u"{0} {1}".format(self.screening_start, self.screening_end)
 
 
+class Seat(models.Model):
+    rowNumber = models.CharField(max_length=3)
+    auditorium = models.ForeignKey(Auditorium)
+
+    def __unicode__(self):
+        return u"{0} {1}".format(self.row, self.number)
+
+
 class Reservation(models.Model):
     reservation_date = models.DateTimeField(auto_now=True)
     reserved = models.BooleanField(default=True)
-    paid = models.BooleanField(default=True)
+    paid = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
     reservation_type = models.ForeignKey(ReservationType)
     user = models.ForeignKey(User)

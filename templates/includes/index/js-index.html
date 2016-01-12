@@ -1,0 +1,88 @@
+{% load staticfiles %}
+{% load jsonify %}
+<!-- jQuery REVOLUTION Slider -->
+<script type="text/javascript" src="{% static "rs-plugin/js/jquery.themepunch.plugins.min.js" %}"></script>
+<script type="text/javascript" src="{% static "rs-plugin/js/jquery.themepunch.revolution.min.js" %}"></script>
+
+<!-- Mobile menu -->
+<script src="{% static "js/jquery.mobile.menu.js" %}"></script>
+<!-- Select -->
+<script src="{% static "js/external/jquery.selectbox-0.2.min.js" %}"></script>
+<!-- Stars rate -->
+<script src="{% static "js/external/jquery.raty.js" %}"></script>
+
+<!-- Form element -->
+<script src="{% static "js/external/form-element.js" %}"></script>
+<!-- Form validation -->
+<script src="{% static "js/form.js" %}"></script>
+
+<!-- Custom -->
+<script src="{% static "js/custom.js" %}"></script>
+
+<!-- Rating for index -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        init_Home();
+        $.fn.raty.defaults.path = "{{ STATIC_URL }}images/rate";
+        $.fn.raty.defaults.size = 24;
+
+        $.fn.raty.defaults.starOn = "star-on.png";
+        $.fn.raty.defaults.starHalf = "star-half.png";
+        $.fn.raty.defaults.half = true;
+        $.fn.raty.defaults.single = false;
+
+        readOnly = $.isEmptyObject({{ votes|jsonify }}) ? false: true;
+
+        $('.score').raty({
+            half: false,
+            readOnly: readOnly,
+            score: function() {
+                return $(this).attr('data-score');
+            },
+            click: function(score, evt) {
+                var current_rating = 0;
+                if (score != null) {
+                    current_rating = score;
+                }
+                movieId = $(this).attr('movieId');
+                $.ajax({
+                    url: "{% url 'rating' %}",
+                    type: "POST",
+                    data: { 'rating': current_rating, 'movieId': movieId, 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    statusCode: {
+                        403: function(jqXHR, textStatus, errorThrown) {
+                            // invalid rating was posted
+                            console.log(errorThrown);
+                        },
+                        200: function(data, textStatus, jqXHR) {
+                            obj = $.parseJSON(data);
+                                $('.movieScoreId'+obj.movieId.toString()).text(obj.avg.toFixed(1));
+                                $('.score#movieId'+obj.movieId).raty('set', {readOnly: true, score: obj.rating });
+                            }
+                        }
+                    });
+            },
+            cancel: false
+        });
+            //if user authenticated remove rating option for rated movies
+            var userVotes = {{ userVotes|jsonify }};
+            if(userVotes){
+                $.each( userVotes, function( key, value ) {
+                    $('.score#movieId'+value.fields.movie)
+                    .raty('set', {readOnly: true, score: value.fields.rating });
+                });
+
+            }else{
+                var votes = {{ votes|jsonify }};
+                if(votes){
+                    $.each( votes, function( key, value ) {
+                        var movieId = value.fields.movie;
+                        var avg = $('.movieScoreId'+movieId).text();
+                        $('.score#movieId'+movieId).raty('set', {readOnly: true, score: avg, half: true });
+
+                    });
+                }
+            }
+        });  
+</script>

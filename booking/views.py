@@ -1,11 +1,19 @@
 from django.views.generic import DetailView, TemplateView
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
 from django.shortcuts import get_list_or_404
 from rating.models import Rating
 from .models import Movie, City, Screening
 from django.utils import timezone
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import json
+
+
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)
 
 
 class MovieView(DetailView):
@@ -40,16 +48,20 @@ class MovieView(DetailView):
             data = Screening.objects.getScreenings(
                 request.POST['cityId'],
                 request.POST['movieId'])
-
         return HttpResponse(
             json.dumps(data), content_type='application/json')
 
 
-class ReserveView(TemplateView):
+class ReserveView(LoginRequiredMixin, DetailView):
     template_name = 'booking/reserve.html'
+    model = Screening
+    slug_field = 'id'
 
     def get_context_data(self, **kwargs):
         context = super(ReserveView, self).get_context_data(**kwargs)
 
         context['site'] = Site.objects.get_current()
         return context
+
+    def post(self, request, *args, **kwargs):
+        pass

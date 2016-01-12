@@ -79,11 +79,7 @@ class ReservationAdmin(admin.ModelAdmin):
 
 @admin.register(Seat)
 class SeatAdmin(admin.ModelAdmin):
-    list_display = ('row', 'number', 'get_auditorium_name')
-    list_filter = ('row', 'number')
-
-    def get_auditorium_name(self, obj):
-        return obj.auditorium.name
+    pass
 
 
 @admin.register(Screening)

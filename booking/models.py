@@ -8,10 +8,18 @@ import datetime
 
 
 def get_image_path(instance, filename):
+    """
+    Get movie image path
+
+    :param instance: Get movie title
+    :param filename: Get name of the movie file
+    :return: path to the movie image
+    """
     return os.path.join('images/movie', str(instance.title), filename)
 
 
 class Category(models.Model):
+    """Create category for the movie"""
     name = models.CharField(max_length=255)
 
     def __unicode__(self):
@@ -34,6 +42,7 @@ class MovieManager(models.Manager):
 
 
 class Movie(models.Model):
+    """Create movie model"""
     image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     image_thumbnail = ImageSpecField(source='image',
                                      processors=[ResizeToFill(424, 424)],
@@ -61,6 +70,7 @@ class Movie(models.Model):
             return 0.00
 
     def get_rating_votes_today(self):
+        """Returns today's rating votes for a Movie"""
         return self.rated_movie.all().filter(
             date_rated__date=datetime.datetime.now().date()).count()
 
@@ -69,6 +79,7 @@ class Movie(models.Model):
 
 
 class City(models.Model):
+    """Create City for the movie"""
     name = models.CharField(max_length=255)
 
     def __unicode__(self):
@@ -76,6 +87,7 @@ class City(models.Model):
 
 
 class Cinema(models.Model):
+    """Create Cinema """
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     CHOICES = [(i, i) for i in range(1, 21, 1)]
@@ -88,6 +100,7 @@ class Cinema(models.Model):
 
 
 class Auditorium(models.Model):
+    """Create Auditorium """
     name = models.CharField(max_length=255)
     seats_number = models.CharField(max_length=2)
     cinema = models.ForeignKey(Cinema)
@@ -97,6 +110,7 @@ class Auditorium(models.Model):
 
 
 class ReservationType(models.Model):
+    """Create Reservation Type"""
     type = models.CharField(max_length=255)
 
     def __unicode__(self):
@@ -104,6 +118,7 @@ class ReservationType(models.Model):
 
 
 class ScreeningManager(models.Manager):
+    """Create Screening Manager"""
     # queryset = Screening.objects.filter(
     #    auditorium__cinema__city__id=request.POST['cityId'])
 
@@ -136,6 +151,7 @@ class ScreeningManager(models.Manager):
 
 
 class Screening(models.Model):
+    """Create Screening"""
     objects = ScreeningManager()
 
     screening_start = models.DateTimeField()
@@ -148,6 +164,7 @@ class Screening(models.Model):
 
 
 class Seat(models.Model):
+    """Create Seat"""
     rowNumber = models.CharField(max_length=3)
     auditorium = models.ForeignKey(Auditorium)
 
@@ -156,6 +173,7 @@ class Seat(models.Model):
 
 
 class Reservation(models.Model):
+    """Create Reservation"""
     reservation_date = models.DateTimeField(auto_now=True)
     reserved = models.BooleanField(default=True)
     paid = models.BooleanField(default=False)

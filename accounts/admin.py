@@ -5,14 +5,15 @@ from .models import User_profile
 
 
 class UserProfileInline(admin.StackedInline):
+    """Get Admin profile"""
     model = User_profile
     can_delete = False
     verbose_name_plural = 'Profile'
     list_display = ('image_thumbnail',)
 
 
-# Define a new User admin
 class UserAdmin(BaseUserAdmin):
+    """Define a new Admin user"""
     inlines = (UserProfileInline, )
 
 

@@ -7,10 +7,20 @@ import os
 
 
 def get_image_path(instance, filename):
+    """
+    Get image path
+
+    :param instance: Get user's username
+    :param filename: Get name of the image file
+    :return: path to the user's image
+    """
     return os.path.join('img', str(instance.user.username), filename)
 
 
 class User_profile(models.Model):
+    """
+    Create User Profile
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, unique=True,
                                 verbose_name=('user'),

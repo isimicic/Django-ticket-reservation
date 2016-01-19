@@ -58,6 +58,10 @@ class ReservationAdmin(admin.ModelAdmin):
     actions = ['make_paid']
 
     def get_reservation_type(self, obj):
+        """
+        :param obj: get reservation type
+        :return: type of reservation
+        """
         return obj.reservation_type.type
 
     def get_user(self, obj):

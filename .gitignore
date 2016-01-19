@@ -23,6 +23,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+static/media_root
 
 # Installer logs
 pip-log.txt

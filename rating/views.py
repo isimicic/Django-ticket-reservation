@@ -14,10 +14,17 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
-# Create your views here.
 class RatingView(LoginRequiredMixin, TemplateView):
+    """Create Rating View"""
 
     def post(self, request, *args, **kwargs):
+        """
+        Post rating
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         data = {}
         if request.is_ajax():
             movie = get_object_or_404(Movie, id=request.POST['movieId'])

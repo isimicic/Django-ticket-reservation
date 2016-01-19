@@ -17,11 +17,18 @@ class LoginRequiredMixin(object):
 
 
 class MovieView(DetailView):
+    """
+    Movie View
+    """
     template_name = 'booking/movie.html'
     model = Movie
     slug_field = 'id'
 
     def get_context_data(self, **kwargs):
+        """
+        :param kwargs: get context data
+        :return: movie
+        """
         context = super(MovieView, self).get_context_data(**kwargs)
         movie = self.get_object()
         if self.request.user.is_authenticated():

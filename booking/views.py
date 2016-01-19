@@ -1,11 +1,13 @@
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
 from django.shortcuts import get_list_or_404
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from rating.models import Rating
-from .models import Movie, City, Screening
+from .models import Movie, City, Screening, Reservation, Seat, ReservationType
 from django.utils import timezone
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 import json
 
 
@@ -64,4 +66,31 @@ class ReserveView(LoginRequiredMixin, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        pass
+        my_list = request.POST['choosen-sits'].split(",")
+        my_list = my_list[:len(my_list)-len(my_list)/2-1]
+        screening = self.get_object()
+        reservationType = ReservationType.objects.create(type='online')
+        cost = request.POST['choosen-cost']
+        reservation = Reservation(user=request.user,
+                                  reservation_type=reservationType,
+                                  screening=screening,
+                                  amount=cost)
+        reservation.save()
+        for item in my_list:
+            seat = Seat.objects.create(rowNumber=item,
+                                       auditorium=screening.auditorium)
+            reservation.seat.add(seat)
+        return HttpResponseRedirect(reverse('reserved',
+                                    args=(reservation.id,)))
+
+
+class ReservedView(LoginRequiredMixin, DetailView):
+    template_name = 'booking/reserved.html'
+    model = Reservation
+    slug_field = 'id'
+
+    def get_context_data(self, **kwargs):
+        context = super(ReservedView, self).get_context_data(**kwargs)
+
+        context['site'] = Site.objects.get_current()
+        return context

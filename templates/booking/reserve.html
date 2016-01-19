@@ -366,17 +366,17 @@
             <input type='text' name='choosen-number--expansive' class="choosen-number--expansive">
             <input type='text' name='choosen-cost' class="choosen-cost">
             <input type='text' name='choosen-sits' class="choosen-sits">
-
+            
 
             <div class="booking-pagination booking-pagination--margin">
                     <a href="/cinema/movie/{{ object.movie.id }}/" class="booking-pagination__prev">
                         <span class="arrow__text arrow--prev">prev step</span>
                         <span class="arrow__info">what&amp;where&amp;when</span>
                     </a>
-                    <a href="#" class="booking-pagination__next">
+                    <button type="submit" class="booking-pagination__next">
                         <span class="arrow__text arrow--next">next step</span>
                         <span class="arrow__info">checkout</span>
-                    </a>
+                    </button>
             </div>
         </form>
 {% endblock%}
@@ -407,6 +407,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             init_BookingTwo();
+
 
         });
     </script>

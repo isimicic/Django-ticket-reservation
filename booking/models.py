@@ -19,9 +19,7 @@ class Category(models.Model):
 
 
 class MovieManager(models.Manager):
-
     """Adds custom methods to Show model."""
-
     def top_rated(self):
         try:
             return self.annotate(score=Avg(
@@ -152,7 +150,7 @@ class Seat(models.Model):
     auditorium = models.ForeignKey(Auditorium)
 
     def __unicode__(self):
-        return u"{0} {1}".format(self.row, self.number)
+        return u"{0}".format(self.rowNumber)
 
 
 class Reservation(models.Model):
@@ -164,6 +162,8 @@ class Reservation(models.Model):
     user = models.ForeignKey(User)
     screening = models.ForeignKey(Screening)
     seat = models.ManyToManyField(Seat)
+    amount = models.DecimalField(max_digits=5, decimal_places=2,
+                                 null=True, blank=True)
 
     def __unicode__(self):
         return u"{0} {1} {2} {3}".format(

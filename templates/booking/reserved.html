@@ -1,1 +1,88 @@
-Bok
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load jsonify %}
+
+{% block title %} Movie ticket reserved | {{ site.name }} {% endblock %}
+
+{% block content %}
+
+<section class="container">
+            <div class="order-container">
+                <div class="order">
+                    <img class="order__images" alt='' src="{% static "images/tickets.png" %}">
+                    <p class="order__title">Thank you <br><span class="order__descript">you have successfully reserved tickets</span></p>
+                </div>
+
+                <div class="ticket">
+                    <div class="ticket-position">
+                        <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
+                        <div class="ticket__inner">
+
+                            <div class="ticket-secondary">
+                                <span class="ticket__item">Ticket number <strong class="ticket__number">{{ object.id }}</strong></span>
+                                <span class="ticket__item ticket__date">{{object.reservation_date|date:'d/m/Y'}}</span>
+                                <span class="ticket__item ticket__time">{{object.reservation_date|date:'H:i'}}</span>
+                                <span class="ticket__item">Cinema: <span class="ticket__cinema">{{object.screening.auditorium.cinema.name}}</span></span>
+                                <span class="ticket__item">Hall: <span class="ticket__hall">{{object.screening.auditorium.name}}</span></span>
+                                <span class="ticket__item ticket__price">price: <strong class="ticket__cost">{{object.amount}}</strong></span>
+                            </div>
+
+                            <div class="ticket-primery">
+                                <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">{{object.screening.movie.title}} {{object.screening.movie.release_date|date:'Y'}}</strong></span>
+                                <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">
+                                {% for seat in object.seat.all %}
+                                    {{seat}}
+                                    {% if not forloop.last %}
+                                         ,                       
+                                    {% endif%}
+                                {% endfor %}  
+                                </span></span>
+                            </div>
+
+
+                        </div>
+                        <div class="ticket__indecator indecator--post"><div class="indecator-text post--text">online ticket</div></div>
+                    </div>
+                </div>
+                    <div class="ticket-control">
+                        <a id="print" class="watchlist list--print">Print</a>
+                    </div>
+            </div>
+        </section>
+
+{% endblock%}
+
+{% block scripts %}
+    <!-- JavaScript-->
+    <!-- jQuery 1.9.1--> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{% static "js/external/jquery-1.10.1.min.js" %}"><\/script>')</script>
+    <!-- Migrate --> 
+    <script src="{% static "js/external/jquery-migrate-1.2.1.min.js" %}"></script>
+    <!-- Bootstrap 3--> 
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+    <!-- Mobile menu -->
+    <script src="{% static "js/jquery.mobile.menu.js" %}"></script>
+    <!-- Select -->
+    <script src="{% static "js/external/jquery.selectbox-0.2.min.js" %}"></script>
+
+    <!-- Form element -->
+    <script src="{% static "js/external/form-element.js" %}"></script>
+    <!-- Form validation -->
+    <script src="{% static "js/form.js" %}"></script>
+
+    <!-- Custom -->
+    <script src="{% static "js/custom.js" %}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+                $('.top-scroll').parent().find('.top-scroll').remove();
+        
+        $('#print').click(function(){
+            window.print();
+        });
+
+        });
+    </script>
+{% endblock %}

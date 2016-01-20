@@ -22,6 +22,8 @@ class ProfileIndexView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileIndexView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['reservations'] = Reservation.objects.filter(user=user)
         context['site'] = Site.objects.get_current()
         return context
 

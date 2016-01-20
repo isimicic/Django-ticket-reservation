@@ -16,8 +16,7 @@
                             <th>Reservation date</th>
                             <th>Payment status</th>
                             <th>Reservation type</th>
-                            <th>Row</th>
-                            <th>Row number</th>
+                            <th>Row numbers</th>
                             <th>Movie</th>
                             <th>Cinema</th>
                             <th>Auditorium</th>
@@ -25,20 +24,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for reservation in object_list %}
+                    {% for reservation in reservations %}
                         <tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ reservation.reservation_date }}</td>
-                        <td>{% if reservation.paid %}<i class="fa fa-check-square-o"></i>{% else %}<i class="fa fa-square-o"></i>{% endif %}</td>
-                        <td>{{ reservation.reservation_type.type }}</td>
-                        {% for seat in reservation.seat.all %}
-                        <td>{{ seat.row }}</td>
-                        <td>{{ seat.number }}</td>
-                        {% endfor %}
-                        <td>{{ reservation.screening.movie.title }}</td>
-                        <td>{{ reservation.screening.auditorium.cinema.name }}</td>
-                        <td>{{ reservation.screening.auditorium.name }}</td>
-                        <td>{{ reservation.screening.auditorium.cinema.city.name }}</td>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ reservation.reservation_date|date:"d/m/Y" }}</td>
+                            <td>{% if reservation.paid %}<i class="fa fa-check-square-o"></i>{% else %}<i class="fa fa-square-o"></i>{% endif %}</td>
+                            <td>{{ reservation.reservation_type.type }}</td>
+                                <td>
+                                {% for seat in reservation.seat.all %}
+                                    {{ seat.rowNumber }}
+                                    {% if not forloop.last %}
+                                        ,                       
+                                    {% endif%}
+                                 {% endfor %}
+                                </td>
+                            <td>{{ reservation.screening.movie.title }}</td>
+                            <td>{{ reservation.screening.auditorium.cinema.name }}</td>
+                            <td>{{ reservation.screening.auditorium.name }}</td>
+                            <td>{{ reservation.screening.auditorium.cinema.city.name }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

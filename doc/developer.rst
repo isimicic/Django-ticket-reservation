@@ -6,26 +6,36 @@ Developer guide
 Setup developer environment
 ---------------------------
 
-Create environment::
+Create environment
+******************
+::
 
    virtualenv ticketReservation
    cd ticketReservation/
    . bin/activate
 
-Pull project from repo::
+Pull project from repo
+**********************
+::
 
    git clone git@bitbucket.org:VsitePythonTeam/ticket-reservation.git
 
-Install requirements::
+Install requirements
+********************
+::
 
    cd ticketReservation/
    pip install -r requirements.txt
 
-Create admin user::
+Create admin user
+*****************
+::
 
    python manage.py createsuperuser
 
-Run server::
+Run server
+**********
+::
 
    python manage.py makemigration
    python manage.py migrate

@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="source.html">Source documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="">Accounts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-accounts.models"><code class="docutils literal"><span class="pre">accounts.models</span></code> &#8211; Accounts models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accounts-models-accounts-models"><code class="docutils literal"><span class="pre">accounts.models</span></code> &#8211; Accounts models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-accounts.admin"><code class="docutils literal"><span class="pre">accounts.admin</span></code> &#8211; Accounts admin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-accounts.views"><code class="docutils literal"><span class="pre">accounts.views</span></code> &#8211; Accounts views</a></li>
 </ul>
@@ -145,9 +145,9 @@
             
   <div class="section" id="module-accounts">
 <span id="accounts"></span><h1>Accounts<a class="headerlink" href="#module-accounts" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-accounts.models">
-<span id="accounts-models-accounts-models"></span><h2><a class="reference internal" href="#module-accounts.models" title="accounts.models"><code class="xref py py-mod docutils literal"><span class="pre">accounts.models</span></code></a> &#8211; Accounts models<a class="headerlink" href="#module-accounts.models" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<div class="section" id="accounts-models-accounts-models">
+<h2><a class="reference internal" href="#module-accounts.models" title="accounts.models"><code class="xref py py-mod docutils literal"><span class="pre">accounts.models</span></code></a> &#8211; Accounts models<a class="headerlink" href="#accounts-models-accounts-models" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-accounts.models"></span><dl class="function">
 <dt id="accounts.models.get_image_path">
 <code class="descclassname">accounts.models.</code><code class="descname">get_image_path</code><span class="sig-paren">(</span><em>instance</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.models.get_image_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get image path</p>
@@ -171,7 +171,8 @@
 <dl class="class">
 <dt id="accounts.models.User_profile">
 <em class="property">class </em><code class="descclassname">accounts.models.</code><code class="descname">User_profile</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.models.User_profile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create User Profile</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create User Profile</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -185,6 +186,36 @@
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="accounts.models.User_profile.user">
+<code class="descname">user</code><a class="headerlink" href="#accounts.models.User_profile.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="accounts.models.User_profile.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#accounts.models.User_profile.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="accounts.models.User_profile.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">User_profile.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#accounts.models.User_profile.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.models.User_profile.objects">
+<code class="descclassname">User_profile.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#accounts.models.User_profile.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -193,24 +224,168 @@
 <dl class="class">
 <dt id="accounts.admin.UserProfileInline">
 <em class="property">class </em><code class="descclassname">accounts.admin.</code><code class="descname">UserProfileInline</code><span class="sig-paren">(</span><em>parent_model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.admin.UserProfileInline" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get Admin profile</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.StackedInline</span></code></p>
+<p>Get Admin profile</p>
 <dl class="attribute">
 <dt id="accounts.admin.UserProfileInline.model">
 <code class="descname">model</code><a class="headerlink" href="#accounts.admin.UserProfileInline.model" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">User_profile</span></code></p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="accounts.admin.UserProfileInline.can_delete">
+<code class="descname">can_delete</code><em class="property"> = False</em><a class="headerlink" href="#accounts.admin.UserProfileInline.can_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.admin.UserProfileInline.verbose_name_plural">
+<code class="descname">verbose_name_plural</code><em class="property"> = 'Profile'</em><a class="headerlink" href="#accounts.admin.UserProfileInline.verbose_name_plural" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.admin.UserProfileInline.list_display">
+<code class="descname">list_display</code><em class="property"> = ('image_thumbnail',)</em><a class="headerlink" href="#accounts.admin.UserProfileInline.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.admin.UserProfileInline.media">
+<code class="descname">media</code><a class="headerlink" href="#accounts.admin.UserProfileInline.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="accounts.admin.UserAdmin">
 <em class="property">class </em><code class="descclassname">accounts.admin.</code><code class="descname">UserAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.admin.UserAdmin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Define a new Admin user</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.admin.UserAdmin</span></code></p>
+<p>Define a new Admin user</p>
+<dl class="attribute">
+<dt id="accounts.admin.UserAdmin.inlines">
+<code class="descname">inlines</code><em class="property"> = (&lt;class 'accounts.admin.UserProfileInline'&gt;,)</em><a class="headerlink" href="#accounts.admin.UserAdmin.inlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.admin.UserAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#accounts.admin.UserAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
 <div class="section" id="module-accounts.views">
 <span id="accounts-views-accounts-views"></span><h2><a class="reference internal" href="rating.html#module-accounts.views" title="accounts.views"><code class="xref py py-mod docutils literal"><span class="pre">accounts.views</span></code></a> &#8211; Accounts views<a class="headerlink" href="#module-accounts.views" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="accounts.views.LoginRequiredMixin">
+<em class="property">class </em><code class="descclassname">accounts.views.</code><code class="descname">LoginRequiredMixin</code><a class="headerlink" href="#accounts.views.LoginRequiredMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="classmethod">
+<dt id="accounts.views.LoginRequiredMixin.as_view">
+<em class="property">classmethod </em><code class="descname">as_view</code><span class="sig-paren">(</span><em>**initkwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.LoginRequiredMixin.as_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="accounts.views.ProfileIndexView">
+<em class="property">class </em><code class="descclassname">accounts.views.</code><code class="descname">ProfileIndexView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.ProfileIndexView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rating.html#accounts.views.LoginRequiredMixin" title="accounts.views.LoginRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">accounts.views.LoginRequiredMixin</span></code></a>, <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-display/#django.views.generic.list.ListView" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.views.generic.list.ListView</span></code></a></p>
+<dl class="attribute">
+<dt id="accounts.views.ProfileIndexView.template_name">
+<code class="descname">template_name</code><em class="property"> = 'accounts/profile.html'</em><a class="headerlink" href="#accounts.views.ProfileIndexView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.views.ProfileIndexView.model">
+<code class="descname">model</code><a class="headerlink" href="#accounts.views.ProfileIndexView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">Reservation</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="accounts.views.ProfileIndexView.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.ProfileIndexView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="accounts.views.ProfileIndexView.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.ProfileIndexView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="accounts.views.AccountEditView">
+<em class="property">class </em><code class="descclassname">accounts.views.</code><code class="descname">AccountEditView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.AccountEditView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rating.html#accounts.views.LoginRequiredMixin" title="accounts.views.LoginRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">accounts.views.LoginRequiredMixin</span></code></a>, <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-editing/#django.views.generic.edit.UpdateView" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></a></p>
+<dl class="attribute">
+<dt id="accounts.views.AccountEditView.template_name">
+<code class="descname">template_name</code><em class="property"> = 'accounts/updateAccount.html'</em><a class="headerlink" href="#accounts.views.AccountEditView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.views.AccountEditView.model">
+<code class="descname">model</code><a class="headerlink" href="#accounts.views.AccountEditView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">User</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.views.AccountEditView.fields">
+<code class="descname">fields</code><em class="property"> = ['username', 'first_name', 'last_name']</em><a class="headerlink" href="#accounts.views.AccountEditView.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.views.AccountEditView.success_url">
+<code class="descname">success_url</code><em class="property"> = &lt;django.utils.functional.__proxy__ object&gt;</em><a class="headerlink" href="#accounts.views.AccountEditView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="accounts.views.AccountEditView.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.AccountEditView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="accounts.views.AccountEditView.get_object">
+<code class="descname">get_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.AccountEditView.get_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="accounts.views.ProfileEditView">
+<em class="property">class </em><code class="descclassname">accounts.views.</code><code class="descname">ProfileEditView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.ProfileEditView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rating.html#accounts.views.LoginRequiredMixin" title="accounts.views.LoginRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">accounts.views.LoginRequiredMixin</span></code></a>, <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-editing/#django.views.generic.edit.UpdateView" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></a></p>
+<dl class="attribute">
+<dt id="accounts.views.ProfileEditView.template_name">
+<code class="descname">template_name</code><em class="property"> = 'accounts/updateProfile.html'</em><a class="headerlink" href="#accounts.views.ProfileEditView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.views.ProfileEditView.model">
+<code class="descname">model</code><a class="headerlink" href="#accounts.views.ProfileEditView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">User_profile</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.views.ProfileEditView.fields">
+<code class="descname">fields</code><em class="property"> = ['image']</em><a class="headerlink" href="#accounts.views.ProfileEditView.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="accounts.views.ProfileEditView.success_url">
+<code class="descname">success_url</code><em class="property"> = &lt;django.utils.functional.__proxy__ object&gt;</em><a class="headerlink" href="#accounts.views.ProfileEditView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="accounts.views.ProfileEditView.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.ProfileEditView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="accounts.views.ProfileEditView.get_object">
+<code class="descname">get_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.ProfileEditView.get_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 

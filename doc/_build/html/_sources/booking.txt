@@ -13,14 +13,20 @@ Booking
 ---------------------------------------
 .. automodule:: booking.models
    :members:
+   :undoc-members:
+   :show-inheritance:
 
 :mod:`booking.admin` -- Booking admin
 ------------------------------------------
 .. automodule:: booking.admin
    :members:
+   :undoc-members:
+   :show-inheritance:
 
 :mod:`booking.views` -- Booking views
 -------------------------------------
 .. automodule:: booking.views
    :members:
+   :undoc-members:
+   :show-inheritance:
 

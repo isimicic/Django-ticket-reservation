@@ -28,7 +28,7 @@ Welcome to Ticket reservation's documentation!
     .. include:: about.rst
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    developer
    source

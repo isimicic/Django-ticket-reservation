@@ -28,7 +28,7 @@
                             </div>
 
                             <div class="ticket-primery">
-                                <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">{{object.screening.movie.title}} {{object.screening.movie.release_date|date:'Y'}}</strong></span>
+                                <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">{{object.screening.movie.title}} ({{object.screening.movie.release_date|date:'Y'}})</strong></span>
                                 <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">
                                 {% for seat in object.seat.all %}
                                     {{seat}}

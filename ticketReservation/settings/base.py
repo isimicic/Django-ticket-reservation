@@ -47,6 +47,7 @@ PROJECT_APPS = [
     'widget_tweaks',
     'rating',
     'jsonify',
+    'booking.templatetags',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS

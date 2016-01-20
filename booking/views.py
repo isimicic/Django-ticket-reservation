@@ -68,12 +68,16 @@ class ReserveView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ReserveView, self).get_context_data(**kwargs)
-
+        screening = self.get_object()
+        context['row_list'] = createRowlist()
+        context['seats'] = [s.rowNumber for s in Seat.objects.
+                            filter(auditorium=screening.auditorium)]
+        print context['seats']
         context['site'] = Site.objects.get_current()
         return context
 
     def post(self, request, *args, **kwargs):
-        my_list = request.POST['choosen-sits'].split(",")
+        my_list = request.POST['choosen-sits'].split(", ")
         my_list = my_list[:len(my_list)-len(my_list)/2-1]
         screening = self.get_object()
         reservationType = ReservationType.objects.create(type='online')
@@ -101,3 +105,45 @@ class ReservedView(LoginRequiredMixin, DetailView):
 
         context['site'] = Site.objects.get_current()
         return context
+
+
+def createRowlist():
+    import string
+    string_list = list(string.uppercase[:12])
+    del string_list[7]
+    row_list = []
+    for alpha in string_list:
+        if alpha == "A":
+            [row_list.append(alpha+repr(i)) for i in xrange(2, 18)]
+            row_list.append(' ')
+        elif alpha == "B":
+            [row_list.append(alpha+repr(i)) for i in xrange(1, 19)]
+            row_list.append(' ')
+        elif alpha == "C":
+            [row_list.append(alpha+repr(i)) for i in xrange(1, 19)]
+            row_list.append(' ')
+        elif alpha == "D":
+            [row_list.append(alpha+repr(i)) for i in xrange(1, 19)]
+            row_list.append(' ')
+        elif alpha == "E":
+            [row_list.append(alpha+repr(i)) for i in xrange(1, 19)]
+            row_list.append(' ')
+        elif alpha == "F":
+            [row_list.append(alpha+repr(i)) for i in xrange(1, 19)]
+            row_list.append(' ')
+        elif alpha == "G":
+            [row_list.append(alpha+repr(i)) for i in xrange(1, 19)]
+            row_list.append(' ')
+        elif alpha == "I":
+            [row_list.append(alpha+repr(i)) for i in xrange(3, 17)]
+            row_list.append(' ')
+        elif alpha == "J":
+            [row_list.append(alpha+repr(i)) for i in xrange(5, 15)]
+            row_list.append(' ')
+        elif alpha == "K":
+            [row_list.append(alpha+repr(i)) for i in xrange(5, 15)]
+            row_list.append(' ')
+        elif alpha == "L":
+            [row_list.append(alpha+repr(i)) for i in xrange(6, 14)]
+            row_list.append(' ')
+    return row_list

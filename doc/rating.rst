@@ -13,13 +13,19 @@ Rating
 ------------------------------------------
 .. automodule:: rating.models
    :members:
+   :undoc-members:
+   :show-inheritance:
 
 :mod:`rating.admin` -- Rating admin
 ------------------------------------------
 .. automodule:: rating.admin
    :members:
+   :undoc-members:
+   :show-inheritance:
 
 :mod:`rating.views` -- Rating views
 ------------------------------------------
 .. automodule:: accounts.views
    :members:
+   :undoc-members:
+   :show-inheritance:

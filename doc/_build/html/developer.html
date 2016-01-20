@@ -85,7 +85,14 @@
             
                 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Developer guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#setup-developer-environment">Setup developer environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-developer-environment">Setup developer environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-environment">Create environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pull-project-from-repo">Pull project from repo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-requirements">Install requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-admin-user">Create admin user</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-server">Run server</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#running-python-tests">Running Python tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running-javascript-tests">Running Javascript tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#coding-conventions">Coding conventions</a></li>
@@ -140,30 +147,40 @@
 <h1>Developer guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setup-developer-environment">
 <h2>Setup developer environment<a class="headerlink" href="#setup-developer-environment" title="Permalink to this headline">¶</a></h2>
-<p>Create environment:</p>
+<div class="section" id="create-environment">
+<h3>Create environment<a class="headerlink" href="#create-environment" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre>virtualenv ticketReservation
 <span class="nb">cd</span> ticketReservation/
 . bin/activate
 </pre></div>
 </div>
-<p>Pull project from repo:</p>
-<div class="highlight-bash"><div class="highlight"><pre>git clone https://isimicic@bitbucket.org/VsitePythonTeam/ticket-reservation.git
+</div>
+<div class="section" id="pull-project-from-repo">
+<h3>Pull project from repo<a class="headerlink" href="#pull-project-from-repo" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre>git clone git@bitbucket.org:VsitePythonTeam/ticket-reservation.git
 </pre></div>
 </div>
-<p>Install requirements:</p>
+</div>
+<div class="section" id="install-requirements">
+<h3>Install requirements<a class="headerlink" href="#install-requirements" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nb">cd</span> ticketReservation/
 pip install -r requirements.txt
 </pre></div>
 </div>
-<p>Create admin user:</p>
+</div>
+<div class="section" id="create-admin-user">
+<h3>Create admin user<a class="headerlink" href="#create-admin-user" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre>python manage.py createsuperuser
 </pre></div>
 </div>
-<p>Run server:</p>
+</div>
+<div class="section" id="run-server">
+<h3>Run server<a class="headerlink" href="#run-server" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre>python manage.py makemigration
 python manage.py migrate
 python manage.py runserver
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="running-python-tests">

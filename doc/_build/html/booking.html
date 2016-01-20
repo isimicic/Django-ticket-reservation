@@ -89,7 +89,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="source.html">Source documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="accounts.html">Accounts</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Booking</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-booking.models"><code class="docutils literal"><span class="pre">booking.models</span></code> &#8211; Booking models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#booking-models-booking-models"><code class="docutils literal"><span class="pre">booking.models</span></code> &#8211; Booking models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-booking.admin"><code class="docutils literal"><span class="pre">booking.admin</span></code> &#8211; Booking admin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-booking.views"><code class="docutils literal"><span class="pre">booking.views</span></code> &#8211; Booking views</a></li>
 </ul>
@@ -145,9 +145,9 @@
             
   <div class="section" id="module-booking">
 <span id="booking"></span><h1>Booking<a class="headerlink" href="#module-booking" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-booking.models">
-<span id="booking-models-booking-models"></span><h2><a class="reference internal" href="#module-booking.models" title="booking.models"><code class="xref py py-mod docutils literal"><span class="pre">booking.models</span></code></a> &#8211; Booking models<a class="headerlink" href="#module-booking.models" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<div class="section" id="booking-models-booking-models">
+<h2><a class="reference internal" href="#module-booking.models" title="booking.models"><code class="xref py py-mod docutils literal"><span class="pre">booking.models</span></code></a> &#8211; Booking models<a class="headerlink" href="#booking-models-booking-models" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-booking.models"></span><dl class="function">
 <dt id="booking.models.get_image_path">
 <code class="descclassname">booking.models.</code><code class="descname">get_image_path</code><span class="sig-paren">(</span><em>instance</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.get_image_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get movie image path</p>
@@ -171,7 +171,8 @@
 <dl class="class">
 <dt id="booking.models.Category">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">Category</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Category" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create category for the movie</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create category for the movie</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -184,18 +185,63 @@
 </tr>
 </tbody>
 </table>
+<dl class="exception">
+<dt id="booking.models.Category.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.Category.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Category.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Category.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.Category.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Category.movie_set">
+<code class="descclassname">Category.</code><code class="descname">movie_set</code><a class="headerlink" href="#booking.models.Category.movie_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">pizza.toppings</span></code> and <code class="docutils literal"><span class="pre">topping.pizzas</span></code> are <code class="docutils literal"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Category.objects">
+<code class="descclassname">Category.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#booking.models.Category.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="booking.models.MovieManager">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">MovieManager</code><a class="headerlink" href="#booking.models.MovieManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds custom methods to Show model.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.manager.Manager</span></code></p>
+<p>Adds custom methods to Show model.</p>
+<dl class="method">
+<dt id="booking.models.MovieManager.top_rated">
+<code class="descname">top_rated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.MovieManager.top_rated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.models.MovieManager.most_rated">
+<code class="descname">most_rated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.MovieManager.most_rated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="booking.models.Movie">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">Movie</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Movie" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create movie model</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create movie model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -231,6 +277,32 @@
 <dd><p>ManyToOneRel to <a class="reference internal" href="rating.html#rating.models.Rating" title="rating.models.Rating"><code class="xref py py-class docutils literal"><span class="pre">rating.models.Rating</span></code></a></p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="booking.models.Movie.image_thumbnail">
+<code class="descname">image_thumbnail</code><em class="property"> = &lt;imagekit.models.fields.ImageSpecField object&gt;</em><a class="headerlink" href="#booking.models.Movie.image_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Movie.categories">
+<code class="descname">categories</code><a class="headerlink" href="#booking.models.Movie.categories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">pizza.toppings</span></code> and <code class="docutils literal"><span class="pre">topping.pizzas</span></code> are <code class="docutils literal"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Movie.objects">
+<code class="descname">objects</code><em class="property"> = &lt;booking.models.MovieManager object&gt;</em><a class="headerlink" href="#booking.models.Movie.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="booking.models.Movie.get_avg_rating">
 <code class="descname">get_avg_rating</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Movie.get_avg_rating" title="Permalink to this definition">¶</a></dt>
@@ -243,12 +315,65 @@
 <dd><p>Returns today&#8217;s rating votes for a Movie</p>
 </dd></dl>
 
+<dl class="exception">
+<dt id="booking.models.Movie.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.Movie.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Movie.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Movie.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.Movie.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Movie.get_next_by_release_date">
+<code class="descclassname">Movie.</code><code class="descname">get_next_by_release_date</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Movie.get_next_by_release_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Movie.get_previous_by_release_date">
+<code class="descclassname">Movie.</code><code class="descname">get_previous_by_release_date</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Movie.get_previous_by_release_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descclassname">Movie.</code><code class="descname">rated_movie</code></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descclassname">Movie.</code><code class="descname">screening_set</code></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="booking.models.City">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">City</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.City" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create City for the movie</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create City for the movie</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -267,12 +392,45 @@
 <dd><p>ManyToOneRel to <a class="reference internal" href="#booking.models.Cinema" title="booking.models.Cinema"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Cinema</span></code></a></p>
 </dd></dl>
 
+<dl class="exception">
+<dt id="booking.models.City.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.City.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.City.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">City.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.City.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descclassname">City.</code><code class="descname">cinema_set</code></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.City.objects">
+<code class="descclassname">City.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#booking.models.City.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="booking.models.Cinema">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">Cinema</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Cinema" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Cinema</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create Cinema</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -294,12 +452,73 @@
 <dd><p>ManyToOneRel to <a class="reference internal" href="#booking.models.Auditorium" title="booking.models.Auditorium"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Auditorium</span></code></a></p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="booking.models.Cinema.CHOICES">
+<code class="descname">CHOICES</code><em class="property"> = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12), (13, 13), (14, 14), (15, 15), (16, 16), (17, 17), (18, 18), (19, 19), (20, 20)]</em><a class="headerlink" href="#booking.models.Cinema.CHOICES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Cinema.city">
+<code class="descname">city</code><a class="headerlink" href="#booking.models.Cinema.city" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Cinema.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.Cinema.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Cinema.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Cinema.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.Cinema.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descclassname">Cinema.</code><code class="descname">auditorium_set</code></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Cinema.get_auditorium_number_display">
+<code class="descclassname">Cinema.</code><code class="descname">get_auditorium_number_display</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Cinema.get_auditorium_number_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Cinema.i">
+<code class="descclassname">Cinema.</code><code class="descname">i</code><em class="property"> = 20</em><a class="headerlink" href="#booking.models.Cinema.i" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Cinema.objects">
+<code class="descclassname">Cinema.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#booking.models.Cinema.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="booking.models.Auditorium">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">Auditorium</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Auditorium" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Auditorium</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create Auditorium</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -321,9 +540,48 @@
 </dd></dl>
 
 <dl class="attribute">
-<dt id="booking.models.Auditorium.seat_set">
-<code class="descname">seat_set</code><a class="headerlink" href="#booking.models.Auditorium.seat_set" title="Permalink to this definition">¶</a></dt>
-<dd><p>ManyToOneRel to <a class="reference internal" href="#booking.models.Seat" title="booking.models.Seat"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Seat</span></code></a></p>
+<dt id="booking.models.Auditorium.cinema">
+<code class="descname">cinema</code><a class="headerlink" href="#booking.models.Auditorium.cinema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Auditorium.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.Auditorium.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Auditorium.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Auditorium.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.Auditorium.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Auditorium.objects">
+<code class="descclassname">Auditorium.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#booking.models.Auditorium.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descclassname">Auditorium.</code><code class="descname">screening_set</code></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
 </dd></dl>
 
 </dd></dl>
@@ -331,7 +589,8 @@
 <dl class="class">
 <dt id="booking.models.ReservationType">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">ReservationType</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.ReservationType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Reservation Type</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create Reservation Type</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -350,18 +609,57 @@
 <dd><p>ManyToOneRel to <a class="reference internal" href="#booking.models.Reservation" title="booking.models.Reservation"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Reservation</span></code></a></p>
 </dd></dl>
 
+<dl class="exception">
+<dt id="booking.models.ReservationType.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.ReservationType.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.ReservationType.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">ReservationType.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.ReservationType.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.ReservationType.objects">
+<code class="descclassname">ReservationType.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#booking.models.ReservationType.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descclassname">ReservationType.</code><code class="descname">reservation_set</code></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="booking.models.ScreeningManager">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">ScreeningManager</code><a class="headerlink" href="#booking.models.ScreeningManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Screening Manager</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.manager.Manager</span></code></p>
+<p>Create Screening Manager</p>
+<dl class="method">
+<dt id="booking.models.ScreeningManager.getScreenings">
+<code class="descname">getScreenings</code><span class="sig-paren">(</span><em>cityId</em>, <em>movieId</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.ScreeningManager.getScreenings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="booking.models.Screening">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">Screening</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Screening" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Screening</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create Screening</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -378,9 +676,108 @@
 </tbody>
 </table>
 <dl class="attribute">
+<dt id="booking.models.Screening.seat_set">
+<code class="descname">seat_set</code><a class="headerlink" href="#booking.models.Screening.seat_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>ManyToOneRel to <a class="reference internal" href="#booking.models.Seat" title="booking.models.Seat"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Seat</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="booking.models.Screening.reservation_set">
 <code class="descname">reservation_set</code><a class="headerlink" href="#booking.models.Screening.reservation_set" title="Permalink to this definition">¶</a></dt>
 <dd><p>ManyToOneRel to <a class="reference internal" href="#booking.models.Reservation" title="booking.models.Reservation"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Reservation</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Screening.objects">
+<code class="descname">objects</code><em class="property"> = &lt;booking.models.ScreeningManager object&gt;</em><a class="headerlink" href="#booking.models.Screening.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Screening.movie">
+<code class="descname">movie</code><a class="headerlink" href="#booking.models.Screening.movie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Screening.auditorium">
+<code class="descname">auditorium</code><a class="headerlink" href="#booking.models.Screening.auditorium" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Screening.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.Screening.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Screening.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Screening.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.Screening.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Screening.get_next_by_screening_end">
+<code class="descclassname">Screening.</code><code class="descname">get_next_by_screening_end</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Screening.get_next_by_screening_end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Screening.get_next_by_screening_start">
+<code class="descclassname">Screening.</code><code class="descname">get_next_by_screening_start</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Screening.get_next_by_screening_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Screening.get_previous_by_screening_end">
+<code class="descclassname">Screening.</code><code class="descname">get_previous_by_screening_end</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Screening.get_previous_by_screening_end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Screening.get_previous_by_screening_start">
+<code class="descclassname">Screening.</code><code class="descname">get_previous_by_screening_start</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Screening.get_previous_by_screening_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descclassname">Screening.</code><code class="descname">reservation_set</code></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descclassname">Screening.</code><code class="descname">seat_set</code></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
 </dd></dl>
 
 </dd></dl>
@@ -388,7 +785,8 @@
 <dl class="class">
 <dt id="booking.models.Seat">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">Seat</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Seat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Seat</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create Seat</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -396,18 +794,65 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>id</strong> (<em>AutoField</em>) &#8211; Id</li>
 <li><strong>rowNumber</strong> (<em>CharField</em>) &#8211; Rownumber</li>
-<li><strong>auditorium</strong> (ForeignKey to <a class="reference internal" href="#booking.models.Auditorium" title="booking.models.Auditorium"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Auditorium</span></code></a>) &#8211; Auditorium</li>
+<li><strong>screenings</strong> (ForeignKey to <a class="reference internal" href="#booking.models.Screening" title="booking.models.Screening"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Screening</span></code></a>) &#8211; Screenings</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="booking.models.Seat.screenings">
+<code class="descname">screenings</code><a class="headerlink" href="#booking.models.Seat.screenings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Seat.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.Seat.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Seat.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Seat.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.Seat.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Seat.objects">
+<code class="descclassname">Seat.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#booking.models.Seat.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Seat.reservation_set">
+<code class="descclassname">Seat.</code><code class="descname">reservation_set</code><a class="headerlink" href="#booking.models.Seat.reservation_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">pizza.toppings</span></code> and <code class="docutils literal"><span class="pre">topping.pizzas</span></code> are <code class="docutils literal"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="booking.models.Reservation">
 <em class="property">class </em><code class="descclassname">booking.models.</code><code class="descname">Reservation</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Reservation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Reservation</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Create Reservation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -421,26 +866,329 @@
 <li><strong>reservation_type</strong> (ForeignKey to <a class="reference internal" href="#booking.models.ReservationType" title="booking.models.ReservationType"><code class="xref py py-class docutils literal"><span class="pre">booking.models.ReservationType</span></code></a>) &#8211; Reservation type</li>
 <li><strong>user</strong> (ForeignKey to <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/contrib/auth/#django.contrib.auth.models.User" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.models.User</span></code></a>) &#8211; User</li>
 <li><strong>screening</strong> (ForeignKey to <a class="reference internal" href="#booking.models.Screening" title="booking.models.Screening"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Screening</span></code></a>) &#8211; Screening</li>
+<li><strong>amount</strong> (<em>DecimalField</em>) &#8211; Amount</li>
 <li><strong>seat</strong> (ManyToManyField to <a class="reference internal" href="#booking.models.Seat" title="booking.models.Seat"><code class="xref py py-class docutils literal"><span class="pre">booking.models.Seat</span></code></a>) &#8211; Seat</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="booking.models.Reservation.reservation_type">
+<code class="descname">reservation_type</code><a class="headerlink" href="#booking.models.Reservation.reservation_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Reservation.user">
+<code class="descname">user</code><a class="headerlink" href="#booking.models.Reservation.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Reservation.screening">
+<code class="descname">screening</code><a class="headerlink" href="#booking.models.Reservation.screening" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Reservation.seat">
+<code class="descname">seat</code><a class="headerlink" href="#booking.models.Reservation.seat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">pizza.toppings</span></code> and <code class="docutils literal"><span class="pre">topping.pizzas</span></code> are <code class="docutils literal"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Reservation.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#booking.models.Reservation.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booking.models.Reservation.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Reservation.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#booking.models.Reservation.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Reservation.get_next_by_reservation_date">
+<code class="descclassname">Reservation.</code><code class="descname">get_next_by_reservation_date</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Reservation.get_next_by_reservation_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.models.Reservation.get_previous_by_reservation_date">
+<code class="descclassname">Reservation.</code><code class="descname">get_previous_by_reservation_date</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.models.Reservation.get_previous_by_reservation_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.models.Reservation.objects">
+<code class="descclassname">Reservation.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#booking.models.Reservation.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
 <div class="section" id="module-booking.admin">
 <span id="booking-admin-booking-admin"></span><h2><a class="reference internal" href="#module-booking.admin" title="booking.admin"><code class="xref py py-mod docutils literal"><span class="pre">booking.admin</span></code></a> &#8211; Booking admin<a class="headerlink" href="#module-booking.admin" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="booking.admin.AuditoriumAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">AuditoriumAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.AuditoriumAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.AuditoriumAdmin.list_display">
+<code class="descname">list_display</code><em class="property"> = ('name', 'seats_number')</em><a class="headerlink" href="#booking.admin.AuditoriumAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.AuditoriumAdmin.list_filter">
+<code class="descname">list_filter</code><em class="property"> = ('name', 'seats_number')</em><a class="headerlink" href="#booking.admin.AuditoriumAdmin.list_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.AuditoriumAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.AuditoriumAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.admin.CategoryAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">CategoryAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.CategoryAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.CategoryAdmin.list_display">
+<code class="descname">list_display</code><em class="property"> = ('name',)</em><a class="headerlink" href="#booking.admin.CategoryAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.CategoryAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.CategoryAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.admin.CinemaAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">CinemaAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.CinemaAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.CinemaAdmin.list_display">
+<code class="descname">list_display</code><em class="property"> = ('name', 'address', 'auditorium_number', 'get_city_name')</em><a class="headerlink" href="#booking.admin.CinemaAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.CinemaAdmin.list_filter">
+<code class="descname">list_filter</code><em class="property"> = ('name', 'address', 'auditorium_number')</em><a class="headerlink" href="#booking.admin.CinemaAdmin.list_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.admin.CinemaAdmin.get_city_name">
+<code class="descname">get_city_name</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.CinemaAdmin.get_city_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.CinemaAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.CinemaAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.admin.CityAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">CityAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.CityAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.CityAdmin.list_display">
+<code class="descname">list_display</code><em class="property"> = ('name',)</em><a class="headerlink" href="#booking.admin.CityAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.CityAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.CityAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="booking.admin.RatingInline">
 <em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">RatingInline</code><span class="sig-paren">(</span><em>parent_model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.RatingInline" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rating Inline.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.StackedInline</span></code></p>
+<p>Rating Inline.</p>
 <dl class="attribute">
 <dt id="booking.admin.RatingInline.model">
 <code class="descname">model</code><a class="headerlink" href="#booking.admin.RatingInline.model" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">Rating</span></code></p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.RatingInline.extra">
+<code class="descname">extra</code><em class="property"> = 1</em><a class="headerlink" href="#booking.admin.RatingInline.extra" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.RatingInline.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.RatingInline.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.admin.MovieAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">MovieAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.MovieAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.MovieAdmin.inlines">
+<code class="descname">inlines</code><em class="property"> = [&lt;class 'booking.admin.RatingInline'&gt;]</em><a class="headerlink" href="#booking.admin.MovieAdmin.inlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.MovieAdmin.list_display">
+<code class="descname">list_display</code><em class="property"> = ('title', 'director', 'duration', 'movie_thumbnail')</em><a class="headerlink" href="#booking.admin.MovieAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.MovieAdmin.list_filter">
+<code class="descname">list_filter</code><em class="property"> = ('title', 'director', 'duration')</em><a class="headerlink" href="#booking.admin.MovieAdmin.list_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.MovieAdmin.movie_thumbnail">
+<code class="descname">movie_thumbnail</code><em class="property"> = &lt;imagekit.admin.AdminThumbnail object&gt;</em><a class="headerlink" href="#booking.admin.MovieAdmin.movie_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.MovieAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.MovieAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.admin.ReservationTypeAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">ReservationTypeAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.ReservationTypeAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.ReservationTypeAdmin.list_display">
+<code class="descname">list_display</code><em class="property"> = ('type',)</em><a class="headerlink" href="#booking.admin.ReservationTypeAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.ReservationTypeAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.ReservationTypeAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.admin.ReservationAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">ReservationAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.ReservationAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.ReservationAdmin.list_display">
+<code class="descname">list_display</code><em class="property"> = ('reservation_date', 'reserved', 'paid', 'active', 'get_reservation_type', 'get_user', 'get_screening')</em><a class="headerlink" href="#booking.admin.ReservationAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.ReservationAdmin.list_filter">
+<code class="descname">list_filter</code><em class="property"> = ('reservation_date', 'reserved', 'paid', 'active')</em><a class="headerlink" href="#booking.admin.ReservationAdmin.list_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.ReservationAdmin.actions">
+<code class="descname">actions</code><em class="property"> = ['make_paid']</em><a class="headerlink" href="#booking.admin.ReservationAdmin.actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.admin.ReservationAdmin.get_reservation_type">
+<code class="descname">get_reservation_type</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.ReservationAdmin.get_reservation_type" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> &#8211; get reservation type</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">type of reservation</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booking.admin.ReservationAdmin.get_user">
+<code class="descname">get_user</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.ReservationAdmin.get_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.admin.ReservationAdmin.get_screening">
+<code class="descname">get_screening</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.ReservationAdmin.get_screening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.admin.ReservationAdmin.make_paid">
+<code class="descname">make_paid</code><span class="sig-paren">(</span><em>request</em>, <em>queryset</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.ReservationAdmin.make_paid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.ReservationAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.ReservationAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.admin.SeatAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">SeatAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.SeatAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.SeatAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.SeatAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.admin.ScreeningAdmin">
+<em class="property">class </em><code class="descclassname">booking.admin.</code><code class="descname">ScreeningAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.admin.ScreeningAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.ModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="booking.admin.ScreeningAdmin.list_display">
+<code class="descname">list_display</code><em class="property"> = ('screening_start', 'screening_end', 'movie', 'auditorium')</em><a class="headerlink" href="#booking.admin.ScreeningAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.admin.ScreeningAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#booking.admin.ScreeningAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -448,14 +1196,36 @@
 <div class="section" id="module-booking.views">
 <span id="booking-views-booking-views"></span><h2><a class="reference internal" href="#module-booking.views" title="booking.views"><code class="xref py py-mod docutils literal"><span class="pre">booking.views</span></code></a> &#8211; Booking views<a class="headerlink" href="#module-booking.views" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="booking.views.LoginRequiredMixin">
+<em class="property">class </em><code class="descclassname">booking.views.</code><code class="descname">LoginRequiredMixin</code><a class="headerlink" href="#booking.views.LoginRequiredMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="classmethod">
+<dt id="booking.views.LoginRequiredMixin.as_view">
+<em class="property">classmethod </em><code class="descname">as_view</code><span class="sig-paren">(</span><em>**initkwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.LoginRequiredMixin.as_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="booking.views.MovieView">
 <em class="property">class </em><code class="descclassname">booking.views.</code><code class="descname">MovieView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.MovieView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Movie View</p>
+<dd><p>Bases: <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-display/#django.views.generic.detail.DetailView" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.DetailView</span></code></a></p>
+<p>Movie View</p>
+<dl class="attribute">
+<dt id="booking.views.MovieView.template_name">
+<code class="descname">template_name</code><em class="property"> = 'booking/movie.html'</em><a class="headerlink" href="#booking.views.MovieView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="booking.views.MovieView.model">
 <code class="descname">model</code><a class="headerlink" href="#booking.views.MovieView.model" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">Movie</span></code></p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="booking.views.MovieView.slug_field">
+<code class="descname">slug_field</code><em class="property"> = 'id'</em><a class="headerlink" href="#booking.views.MovieView.slug_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="booking.views.MovieView.get_context_data">
@@ -472,7 +1242,76 @@
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="booking.views.MovieView.post">
+<code class="descname">post</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.MovieView.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
+
+<dl class="class">
+<dt id="booking.views.ReserveView">
+<em class="property">class </em><code class="descclassname">booking.views.</code><code class="descname">ReserveView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.ReserveView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#booking.views.LoginRequiredMixin" title="booking.views.LoginRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">booking.views.LoginRequiredMixin</span></code></a>, <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-display/#django.views.generic.detail.DetailView" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.DetailView</span></code></a></p>
+<dl class="attribute">
+<dt id="booking.views.ReserveView.template_name">
+<code class="descname">template_name</code><em class="property"> = 'booking/reserve.html'</em><a class="headerlink" href="#booking.views.ReserveView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.views.ReserveView.model">
+<code class="descname">model</code><a class="headerlink" href="#booking.views.ReserveView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">Screening</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.views.ReserveView.slug_field">
+<code class="descname">slug_field</code><em class="property"> = 'id'</em><a class="headerlink" href="#booking.views.ReserveView.slug_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.views.ReserveView.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.ReserveView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.views.ReserveView.post">
+<code class="descname">post</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.ReserveView.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booking.views.ReservedView">
+<em class="property">class </em><code class="descclassname">booking.views.</code><code class="descname">ReservedView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.ReservedView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#booking.views.LoginRequiredMixin" title="booking.views.LoginRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">booking.views.LoginRequiredMixin</span></code></a>, <a class="reference external" href="http://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-display/#django.views.generic.detail.DetailView" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.DetailView</span></code></a></p>
+<dl class="attribute">
+<dt id="booking.views.ReservedView.template_name">
+<code class="descname">template_name</code><em class="property"> = 'booking/reserved.html'</em><a class="headerlink" href="#booking.views.ReservedView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="booking.views.ReservedView.model">
+<code class="descname">model</code><a class="headerlink" href="#booking.views.ReservedView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">Reservation</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booking.views.ReservedView.slug_field">
+<code class="descname">slug_field</code><em class="property"> = 'id'</em><a class="headerlink" href="#booking.views.ReservedView.slug_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="booking.views.ReservedView.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.ReservedView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="booking.views.createRowlist">
+<code class="descclassname">booking.views.</code><code class="descname">createRowlist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#booking.views.createRowlist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 </div>

@@ -13,13 +13,19 @@ Accounts
 ------------------------------------------
 .. automodule:: accounts.models
    :members:
+   :undoc-members:
+   :show-inheritance:
 
 :mod:`accounts.admin` -- Accounts admin
 ------------------------------------------
 .. automodule:: accounts.admin
    :members:
+   :undoc-members:
+   :show-inheritance:
 
 :mod:`accounts.views` -- Accounts views
 ------------------------------------------
 .. automodule:: accounts.views
    :members:
+   :undoc-members:
+   :show-inheritance:

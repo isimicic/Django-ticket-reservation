@@ -164,7 +164,7 @@ class Screening(models.Model):
 class Seat(models.Model):
     """Create Seat"""
     rowNumber = models.CharField(max_length=3)
-    auditorium = models.ForeignKey(Auditorium)
+    screenings = models.ForeignKey(Screening)
 
     def __unicode__(self):
         return u"{0}".format(self.rowNumber)

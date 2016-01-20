@@ -71,8 +71,7 @@ class ReserveView(LoginRequiredMixin, DetailView):
         screening = self.get_object()
         context['row_list'] = createRowlist()
         context['seats'] = [s.rowNumber for s in Seat.objects.
-                            filter(auditorium=screening.auditorium)]
-        print context['seats']
+                            filter(screenings=screening)]
         context['site'] = Site.objects.get_current()
         return context
 
@@ -89,7 +88,7 @@ class ReserveView(LoginRequiredMixin, DetailView):
         reservation.save()
         for item in my_list:
             seat = Seat.objects.create(rowNumber=item,
-                                       auditorium=screening.auditorium)
+                                       screenings=screening)
             reservation.seat.add(seat)
         return HttpResponseRedirect(reverse('reserved',
                                     args=(reservation.id,)))

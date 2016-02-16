@@ -46,16 +46,16 @@ class Movie(models.Model):
                                      processors=[ResizeToFill(424, 424)],
                                      format='JPEG',
                                      options={'quality': 60})
-    title = models.CharField(max_length=255)
-    director = models.CharField(max_length=255)
-    cast = models.TextField()
-    description = models.TextField()
-    duration = models.PositiveSmallIntegerField()
+    title = models.CharField(max_length=255, blank=True, null=True)
+    director = models.CharField(max_length=255, blank=True, null=True)
+    cast = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    duration = models.PositiveSmallIntegerField(blank=True, null=True)
     categories = models.ManyToManyField(Category)
-    release_date = models.DateTimeField()
-    now_playing = models.BooleanField()
-    country = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
+    release_date = models.DateTimeField(blank=True, null=True)
+    now_playing = models.NullBooleanField()
+    country = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
     age_restriction = models.CharField(max_length=2, null=True, blank=True)
 
     objects = MovieManager()
@@ -168,6 +168,9 @@ class Seat(models.Model):
 
     def __unicode__(self):
         return u"{0}".format(self.rowNumber)
+
+    class Meta:
+        unique_together = ("rowNumber", "screenings")
 
 
 class Reservation(models.Model):

@@ -5,7 +5,7 @@ virtualenv ticketReservation
 cd ticketReservation/
 . bin/activate
 
-git clone https://isimicic@bitbucket.org/VsitePythonTeam/ticket-reservation.git
+git clone 
 
 cd ticketReservation/
 pip install -r requirements.txt

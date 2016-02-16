@@ -5,7 +5,7 @@ virtualenv ticketReservation
 cd ticketReservation/
 . bin/activate
 
-git clone 
+git clone https://github.com/isimicic/Django-ticket-reservation.git
 
 cd ticketReservation/
 pip install -r requirements.txt
